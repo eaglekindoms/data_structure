@@ -2,10 +2,10 @@ add_compile_options(-fexec-charset=utf-8)
 
 #-------栈--------
 #顺序栈测试
-add_executable(test_sq_stack stack/test_sq_stack.c)
+add_executable(test_sq_stack test_code/test_stack_sq.c)
 target_sources(test_sq_stack PUBLIC stack/sq_stack.c)
 #链栈测试
-add_executable(test_link_stack stack/test_link_stack.c)
+add_executable(test_link_stack test_code/test_stack_link.c)
 target_sources(test_link_stack PUBLIC stack/link_stack.c)
 #-------栈--------
 

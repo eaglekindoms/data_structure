@@ -1,0 +1,12 @@
+//
+// Created by eagle on 2021/5/31.
+//
+
+#ifndef DATA_STRUCTURE_ERROR_CODE_H
+#define DATA_STRUCTURE_ERROR_CODE_H
+
+#define ERROR_MALLOC_FAILED -2
+#define ERROR_INVALID_INDEX -3
+#define ERROR_NULL_PTR -4
+
+#endif //DATA_STRUCTURE_ERROR_CODE_H

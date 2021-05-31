@@ -18,7 +18,7 @@ struct Stack_T {
 Stack init() {
     Stack stack = (Stack) malloc(sizeof(Stack));
     stack->base = (T *) malloc(STACK_INIT_SIZE * sizeof(T));
-    if (!stack->base) exit(-2);
+    if (!stack->base) exit(ERROR_MALLOC_FAILED);
     stack->top = stack->base;
     stack->capacity = STACK_INIT_SIZE;
     stack->length = 0;
@@ -32,7 +32,7 @@ int size(Stack s) {
 void push(Stack s, T data) {
     if (s->top - s->base >= s->capacity) {
         s->base = (T *) realloc(s->base, (s->capacity + STACKINCREMET) * sizeof(T));
-        if (!s->base) exit(-2);
+        if (!s->base) exit(ERROR_MALLOC_FAILED);
         s->top = s->base + s->capacity;
         s->capacity += STACKINCREMET;
     }
@@ -42,7 +42,7 @@ void push(Stack s, T data) {
 }
 
 T pop(Stack s) {
-    if (s->top == s->base) exit(-3);
+    if (s->top == s->base) exit(ERROR_NULL_PTR);
     s->length--;
     T data = *(--s->top);
     printf("pop: %d \n", data);
@@ -50,7 +50,7 @@ T pop(Stack s) {
 }
 
 T top(Stack s) {
-    if (s->top == s->base) exit(-3);
+    if (s->top == s->base) exit(ERROR_NULL_PTR);
     return *(s->top - 1);
 }
 

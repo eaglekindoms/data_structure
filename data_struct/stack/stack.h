@@ -3,8 +3,9 @@
 //
 #ifndef DATA_STRUCTURE_SQ_STACK_H
 #define DATA_STRUCTURE_SQ_STACK_H
-#define TRUE  1
-#define FALSE 0
+
+#include "error_code.h"
+#include "boolean.h"
 
 typedef int T;
 

@@ -39,7 +39,7 @@ void push(Stack s, T data) {
 T pop(Stack s) {
     if (isEmpty(s) == TRUE) {
         printf("the stack is empty!\n");
-        exit(-3);
+        exit(ERROR_NULL_PTR);
     }
     Node *node = s->head;
     T data = node->data;
@@ -53,7 +53,7 @@ T pop(Stack s) {
 T top(Stack s) {
     if (isEmpty(s) == TRUE) {
         printf("the stack is empty!\n");
-        exit(-3);
+        exit(ERROR_NULL_PTR);
     }
     T data = s->head->data;
     printf("top: %d \n", data);

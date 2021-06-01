@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "error_code.h"
+#include "linear_list.h"
 
 #define TABLE_INIT_SIZE 10
 #define TABLE_INCREMENT 5
 
-typedef int T;
-typedef struct STable {
+struct linear_list {
     int *head;
     int length;
     int capacity;
-} *Table;
+};
 
-Table initTable() {
-    Table t = (Table) malloc(sizeof(Table));
+List initList() {
+    List t = (List) malloc(sizeof(List));
     t->head = (T *) malloc(TABLE_INIT_SIZE * sizeof(T));
     if (!t->head) {
         printf("---malloc memory failed---\n");
@@ -24,7 +24,7 @@ Table initTable() {
     return t;
 }
 
-void insertElem(Table table, int index, T data) {
+void insertElem(List table, int index, T data) {
     if (index > table->length || index < 0) {
         printf("---invalid index---");
         exit(ERROR_INVALID_INDEX);
@@ -44,7 +44,7 @@ void insertElem(Table table, int index, T data) {
     table->length++;
 }
 
-void setElem(Table table, int index, T data) {
+void replaceElem(List table, int index, T data) {
     if (index > table->length - 1 || index < 0) {
         printf("---invalid index---");
         exit(ERROR_INVALID_INDEX);
@@ -52,11 +52,11 @@ void setElem(Table table, int index, T data) {
     table->head[index] = data;
 }
 
-void addElem(Table table, T data) {
+void addElem(List table, T data) {
     insertElem(table, table->length, data);
 }
 
-T getElem(Table table, int index) {
+T getElem(List table, int index) {
     if (index > table->length - 1 || index < 0) {
         printf("---invalid index---");
         exit(ERROR_INVALID_INDEX);
@@ -64,7 +64,7 @@ T getElem(Table table, int index) {
     return table->head[index];
 }
 
-T removeElem(Table table, int index) {
+T removeElem(List table, int index) {
     if (index > table->length - 1 || index < 0) {
         printf("---invalid index---");
         exit(ERROR_INVALID_INDEX);
@@ -77,7 +77,7 @@ T removeElem(Table table, int index) {
     return data;
 }
 
-int searchElem(Table table, T data) {
+int searchElem(List table, T data) {
     for (int i = 0; i < table->length; ++i) {
         if (table->head[i] == data) {
             return i;
@@ -86,15 +86,7 @@ int searchElem(Table table, T data) {
     return -1;
 }
 
-void replaceElem(Table table, T old, T new) {
-    int oldIndex = searchElem(table, old);
-    while (oldIndex != -1 && old != new) {
-        table->head[oldIndex] = new;
-        oldIndex = searchElem(table, old);
-    }
-}
-
-void printTable(Table table) {
+void printList(List table) {
     printf("\n--- print all of elements at the table ---\n");
     for (int i = 0; i < table->length; ++i) {
         printf("%d ", table->head[i]);

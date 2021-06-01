@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linear_list.h"
-
+#include "error_code.h"
 
 typedef struct SNode {
     T data;
@@ -33,7 +33,7 @@ Node *getPriorNode(List list, int index) {
         temp = temp->next;
         if (temp == NULL) {
             printf("---invalid index---");
-            exit(-1);
+            exit(ERROR_INVALID_INDEX);
         }
     }
     return temp;
@@ -43,7 +43,7 @@ Node *getPriorNode(List list, int index) {
 void insertElem(List list, int index, T data) {
     if (index > list->length - 1 || index < 0) {
         printf("---invalid index---");
-        exit(-1);
+        exit(ERROR_INVALID_INDEX);
     }
     Node *node = (Node *) malloc(sizeof(Node));
     node->data = data;
@@ -75,7 +75,7 @@ void addElem(List list, T data) {
 void replaceElem(List list, int index, T data) {
     if (index > list->length - 1 || index < 0 || isEmpty(list)) {
         printf("---invalid index---");
-        exit(-1);
+        exit(ERROR_INVALID_INDEX);
     }
     Node *prior = getPriorNode(list, index);
     prior->next->data = data;
@@ -85,7 +85,7 @@ void replaceElem(List list, int index, T data) {
 T getElem(List list, int index) {
     if (index > list->length - 1 || index < 0 || isEmpty(list)) {
         printf("---invalid index---");
-        exit(-1);
+        exit(ERROR_INVALID_INDEX);
     }
     Node *prior = getPriorNode(list, index);
     return prior->next->data;
@@ -108,7 +108,7 @@ int searchElem(List list, T data) {
 T removeElem(List list, int index) {
     if (index > list->length - 1 || index < 0 || isEmpty(list)) {
         printf("---invalid index---");
-        exit(-1);
+        exit(ERROR_INVALID_INDEX);
     }
     Node *prior = getPriorNode(list, index);
     Node *delNode = prior->next;

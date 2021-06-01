@@ -18,9 +18,8 @@ target_sources(linear_list_link_single PUBLIC list/singly_linked_list.c)
 add_executable(linear_list_link_double test_code/test_linear_list_link_double.c)
 target_sources(linear_list_link_double PUBLIC list/doubly_linked_list.c)
 
-add_executable(sequence_table list/sequence_table.c)
-add_executable(sequence_table test_code/test_list_sequence.c)
-#target_sources(sequence_table PUBLIC list/sequence_table.h)
-add_executable(singly_linked_list list/singly_linked_list.c)
-add_executable(doubly_linked_list list/doubly_linked_list.c)
+# 顺序表
+add_executable(linear_list_sequence test_code/test_list_sequence.c)
+target_sources(linear_list_sequence PUBLIC list/sequence_list.c)
+
 #-------线性表--------

@@ -10,6 +10,15 @@ target_sources(test_link_stack PUBLIC stack/link_stack.c)
 #-------栈--------
 
 #-------线性表--------
+# 单链表
+add_executable(linear_list_link_single test_code/test_linear_list_link_single.c)
+target_sources(linear_list_link_single PUBLIC list/singly_linked_list.c)
+
+# 双链表
+add_executable(linear_list_link_double test_code/test_linear_list_link_double.c)
+target_sources(linear_list_link_double PUBLIC list/doubly_linked_list.c)
+
+add_executable(sequence_table list/sequence_table.c)
 add_executable(sequence_table test_code/test_list_sequence.c)
 #target_sources(sequence_table PUBLIC list/sequence_table.h)
 add_executable(singly_linked_list list/singly_linked_list.c)

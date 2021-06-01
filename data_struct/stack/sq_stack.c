@@ -65,7 +65,7 @@ void destroy(Stack s) {
     s->base = NULL;
     s->capacity = 0;
     s->length = 0;
-    s=NULL;
+    s = NULL;
     printf("the stack is destroyed\n");
 }
 

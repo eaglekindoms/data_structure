@@ -4,151 +4,160 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "linear_list.h"
 
-typedef struct line {
-    struct line *prior;
-    int data;
-    struct line *next;
-} line;
+typedef struct DNode {
+    struct DNode *prior;
+    T data;
+    struct DNode *next;
+} Node;
 
-//双链表的创建
-line *initLine(line *head);
+struct linear_list {
+    int length;
+    Node *head;
+};
 
-//双链表插入元素，add表示插入位置
-line *insertLine(line *head, int data, int add);
-
-//双链表删除指定元素
-line *delLine(line *head, int data);
-
-//双链表中查找指定元素
-int selectElem(line *head, int elem);
-
-//双链表中更改指定位置节点中存储的数据，add表示更改位置
-line *amendElem(line *p, int add, int newElem);
-
-//输出双链表的实现函数
-void display(line *head);
-
-int main() {
-    line *head = NULL;
-    //创建双链表
-    head = initLine(head);
-    display(head);
-    //在表中第 3 的位置插入元素 7
-    head = insertLine(head, 7, 3);
-    display(head);
-    //表中删除元素 2
-    head = delLine(head, 2);
-    display(head);
-    printf("The position of element 3 is: %d\n", selectElem(head, 3));
-    //表中第 3 个节点中的数据改为存储 6
-    head = amendElem(head, 3, 6);
-    display(head);
-    return 0;
+// 初始化线性表
+List initList() {
+    List list = (List) malloc(sizeof(List));
+    list->head = (Node *) malloc(sizeof(Node));
+    list->length = 0;
+    return list;
 }
 
-line *initLine(line *head) {
-    head = (line *) malloc(sizeof(line));
-    head->prior = NULL;
-    head->next = NULL;
-    head->data = 1;
-    line *list = head;
-    for (int i = 2; i <= 5; i++) {
-        line *body = (line *) malloc(sizeof(line));
-        body->prior = NULL;
-        body->next = NULL;
-        body->data = i;
-        list->next = body;
-        body->prior = list;
-        list = list->next;
-    }
-    return head;
-}
-
-line *insertLine(line *head, int data, int add) {
-    //新建数据域为data的结点
-    line *temp = (line *) malloc(sizeof(line));
-    temp->data = data;
-    temp->prior = NULL;
-    temp->next = NULL;
-    //插入到链表头，要特殊考虑
-    if (add == 1) {
-        temp->next = head;
-        head->prior = temp;
-        head = temp;
-    } else {
-        line *body = head;
-        //找到要插入位置的前一个结点
-        for (int i = 1; i < add - 1; i++) {
-            body = body->next;
-        }
-        //判断条件为真，说明插入位置为链表尾
-        if (body->next == NULL) {
-            body->next = temp;
-            temp->prior = body;
-        } else {
-            body->next->prior = temp;
-            temp->next = body->next;
-            body->next = temp;
-            temp->prior = body;
-        }
-    }
-    return head;
-}
-
-line *delLine(line *head, int data) {
-    line *temp = head;
-    //遍历链表
-    while (temp) {
-        //判断当前结点中数据域和data是否相等，若相等，摘除该结点
-        if (temp->data == data) {
-            temp->prior->next = temp->next;
-            temp->next->prior = temp->prior;
-            free(temp);
-            return head;
-        }
+// 获取指定索引的节点
+Node *getNode(List list, int index) {
+    Node *temp = list->head;
+    for (int i = 0; i <= index; i++) {
         temp = temp->next;
-    }
-    printf("The data element does not exist in the linked list");
-    return head;
-}
-
-//head为原双链表，elem表示被查找元素
-int selectElem(line *head, int elem) {
-//新建一个指针t，初始化为头指针 head
-    line *t = head;
-    int i = 1;
-    while (t) {
-        if (t->data == elem) {
-            return i;
+        if (temp == NULL) {
+            printf("---invalid index---");
+            exit(-1);
         }
-        i++;
-        t = t->next;
     }
-    //程序执行至此处，表示查找失败
-    return -1;
+    return temp;
 }
 
-//更新函数，其中，add 表示更改结点在双链表中的位置，newElem 为新数据的值
-line *amendElem(line *p, int add, int newElem) {
-    line *temp = p;
-    //遍历到被删除结点
-    for (int i = 1; i < add; i++) {
+// 在指定位置插入元素，长度加一
+void insertElem(List list, int index, T data) {
+    if (index > list->length - 1 || index < 0) {
+        printf("---invalid index---");
+        exit(-1);
+    }
+    Node *node = (Node *) malloc(sizeof(Node));
+    node->data = data;
+
+    Node *curr = getNode(list, index);
+    node->prior = curr->prior;
+    node->next = curr;
+    curr->prior->next = node;
+    curr->prior = node;
+    list->length++;
+}
+
+// 添加元素
+void addElem(List list, T data) {
+    Node *node = (Node *) malloc(sizeof(Node));
+    node->data = data;
+    if (list->length == 0) {
+        node->prior = list->head;
+        list->head->next = node;
+        list->length++;
+        return;
+    }
+
+    Node *curr = getNode(list, list->length - 1);
+    curr->next = node;
+    node->prior = curr;
+    list->length++;
+}
+
+// 替换指定索引的元素
+void replaceElem(List list, int index, T data) {
+    if (index > list->length - 1 || index < 0 || isEmpty(list)) {
+        printf("---invalid index---");
+        exit(-1);
+    }
+    Node *curr = getNode(list, index);
+    curr->data = data;
+}
+
+// 获取指定索引的元素
+T getElem(List list, int index) {
+    if (index > list->length - 1 || index < 0 || isEmpty(list)) {
+        printf("---invalid index---");
+        exit(-1);
+    }
+    Node *curr = getNode(list, index);
+    return curr->data;
+}
+
+// 查找元素，返回索引
+int searchElem(List list, T data) {
+    Node *temp = list->head;
+    int index = -1;
+    for (int i = 0; i < list->length; i++) {
         temp = temp->next;
-    }
-    temp->data = newElem;
-    return p;
-}
-
-//输出链表的功能函数
-void display(line *head) {
-    line *temp = head;
-    while (temp) {
-        if (temp->next == NULL) {
-            printf("%d\n", temp->data);
-        } else {
-            printf("%d->", temp->data);
+        if (data == temp->data) {
+            index = i;
         }
-        temp = temp->next;
     }
+    return index;
+}
+
+// 删除指定位置的元素
+T removeElem(List list, int index) {
+    if (index > list->length - 1 || index < 0 || isEmpty(list)) {
+        printf("---invalid index---");
+        exit(-1);
+    }
+    Node *curr = getNode(list, index);
+    T data = curr->data;
+    curr->prior->next = curr->next;
+    curr->next->prior = curr->prior;
+    list->length--;
+    free(curr);
+    return data;
+}
+
+// 获取线性表长度
+int getLength(List list) {
+    return list->length;
+}
+
+// 判断线性表是否为空
+int isEmpty(List list) {
+    return list->length == 0;
+}
+
+// 清空线性表
+void clearList(List list) {
+    printf("\n---clear list ---\n");
+    Node *curr = list->head->next;
+    for (int i = 0; i < list->length; i++) {
+        Node *temp = curr;
+        curr = curr->next;
+        free(temp);
+    }
+    list->length = 0;
+}
+
+// 打印线性表所有元素
+void printList(List list) {
+    if (isEmpty(list)) {
+        printf("\n---empty list ---\n");
+        return;
+    }
+    printf("\n---print double link list ---\n");
+    Node *temp = list->head;
+    for (int i = 0; i < list->length; i++) {
+        temp = temp->next;
+        printf("%d ", temp->data);
+    }
+    printf("\n---print done---\n");
+}
+
+//独有方法
+void uniqueFun(List list) {
+
 }

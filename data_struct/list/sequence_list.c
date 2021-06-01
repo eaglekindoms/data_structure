@@ -44,6 +44,10 @@ void insertElem(List table, int index, T data) {
     table->length++;
 }
 
+void addElem(List table, T data) {
+    insertElem(table, table->length, data);
+}
+
 void replaceElem(List table, int index, T data) {
     if (index > table->length - 1 || index < 0) {
         printf("---invalid index---");
@@ -52,16 +56,21 @@ void replaceElem(List table, int index, T data) {
     table->head[index] = data;
 }
 
-void addElem(List table, T data) {
-    insertElem(table, table->length, data);
-}
-
 T getElem(List table, int index) {
     if (index > table->length - 1 || index < 0) {
         printf("---invalid index---");
         exit(ERROR_INVALID_INDEX);
     }
     return table->head[index];
+}
+
+int searchElem(List table, T data) {
+    for (int i = 0; i < table->length; ++i) {
+        if (table->head[i] == data) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 T removeElem(List table, int index) {
@@ -77,13 +86,16 @@ T removeElem(List table, int index) {
     return data;
 }
 
-int searchElem(List table, T data) {
-    for (int i = 0; i < table->length; ++i) {
-        if (table->head[i] == data) {
-            return i;
-        }
-    }
-    return -1;
+int getLength(List list) {
+    return list->length;
+}
+
+int isEmpty(List list) {
+    return list->length == 0;
+}
+
+void clearList(List list) {
+
 }
 
 void printList(List table) {
@@ -92,4 +104,8 @@ void printList(List table) {
         printf("%d ", table->head[i]);
     }
     printf("\n");
+}
+
+void uniqueFun(List list) {
+
 }

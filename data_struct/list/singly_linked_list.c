@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linear_list.h"
-#include "error_code.h"
 
 typedef struct SNode {
     T data;
@@ -131,7 +130,7 @@ int isEmpty(List list) {
 
 // 清空线性表
 void clearList(List list) {
-    printf("\n---clear list ---\n");
+    printf("\n---clearStack list ---\n");
     Node *curr = list->head->next;
     for (int i = 0; i < list->length; i++) {
         Node *temp = curr;

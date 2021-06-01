@@ -17,18 +17,18 @@ struct Stack_T {
     Node *head;
 };
 
-Stack init() {
+Stack initStack() {
     Stack stack = (Stack) malloc(sizeof(Stack));
     stack->head = NULL;
     stack->length = 0;
     return stack;
 }
 
-int size(Stack s) {
+int getLength(Stack s) {
     return s->length;
 }
 
-void push(Stack s, T data) {
+void pushStack(Stack s, T data) {
     Node *node = (Node *) malloc(sizeof(Node));
     node->data = data;
     node->next = s->head;
@@ -36,7 +36,7 @@ void push(Stack s, T data) {
     s->length++;
 }
 
-T pop(Stack s) {
+T popStack(Stack s) {
     if (isEmpty(s) == TRUE) {
         printf("the stack is empty!\n");
         exit(ERROR_NULL_PTR);
@@ -46,21 +46,21 @@ T pop(Stack s) {
     s->head = node->next;
     s->length--;
     free(node);
-    printf("pop: %d \n", data);
+    printf("popStack: %d \n", data);
     return data;
 }
 
-T top(Stack s) {
+T getTop(Stack s) {
     if (isEmpty(s) == TRUE) {
         printf("the stack is empty!\n");
         exit(ERROR_NULL_PTR);
     }
     T data = s->head->data;
-    printf("top: %d \n", data);
+    printf("getTop: %d \n", data);
     return data;
 }
 
-void clear(Stack s) {
+void clearStack(Stack s) {
     Node *node = s->head;
     while (node != NULL) {
         s->head = node->next;

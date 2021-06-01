@@ -5,21 +5,21 @@
 #include "stack.h"
 
 int testStack() {
-    Stack stack = init();
-    push(stack, 1);
-    push(stack, 2);
-    push(stack, 3);
-    printf("stack's top: %d\n", top(stack));
-    push(stack, 4);
-    push(stack, 5);
+    Stack stack = initStack();
+    pushStack(stack, 1);
+    pushStack(stack, 2);
+    pushStack(stack, 3);
+    printf("stack's getTop: %d\n", getTop(stack));
+    pushStack(stack, 4);
+    pushStack(stack, 5);
     printStack(stack);
-    pop(stack);
-    pop(stack);
-    printf("stack's length: %d\n", size(stack));
-    pop(stack);
+    popStack(stack);
+    popStack(stack);
+    printf("stack's length: %d\n", getLength(stack));
+    popStack(stack);
     printStack(stack);
-    printf("stack's length: %d\n", size(stack));
-    clear(stack);
+    printf("stack's length: %d\n", getLength(stack));
+    clearStack(stack);
     printStack(stack);
     destroy(stack);
 }

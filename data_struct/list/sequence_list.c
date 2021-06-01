@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "error_code.h"
 #include "linear_list.h"
 
 #define TABLE_INIT_SIZE 10

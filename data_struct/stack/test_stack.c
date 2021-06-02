@@ -20,6 +20,7 @@ int testStack() {
     printStack(stack);
     printf("stack's length: %d\n", getLength(stack));
     clearStack(stack);
+    pushStack(stack, 115);
     printStack(stack);
     destroy(stack);
 }

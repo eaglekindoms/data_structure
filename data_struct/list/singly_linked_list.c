@@ -54,7 +54,7 @@ void insertElem(List list, int index, T data) {
 void addElem(List list, T data) {
     Node *node = (Node *) malloc(sizeof(Node));
     node->data = data;
-
+    node->next = NULL;
     if (list->length == 0) {
         list->head->next = node;
         list->length++;

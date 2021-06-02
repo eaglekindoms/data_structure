@@ -13,6 +13,9 @@ target_sources(test_stack_link PUBLIC stack/link_stack.c)
 #顺序队列测试
 add_executable(test_queue_sq test_code/test_queue_sq.c)
 target_sources(test_queue_sq PUBLIC queue/sq_queue.c)
+#链式队列测试
+add_executable(test_queue_link test_code/test_queue_link.c)
+target_sources(test_queue_link PUBLIC queue/link_queue.c)
 #-------队列--------
 
 #-------线性表--------

@@ -4,6 +4,9 @@
 #ifndef DATA_STRUCTURE_SQ_STACK_H
 #define DATA_STRUCTURE_SQ_STACK_H
 
+
+#include "stdio.h"
+#include "stdlib.h"
 #include "error_code.h"
 #include "boolean.h"
 

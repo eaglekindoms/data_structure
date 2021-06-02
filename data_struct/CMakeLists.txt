@@ -2,12 +2,18 @@ add_compile_options(-fexec-charset=utf-8)
 
 #-------栈--------
 #顺序栈测试
-add_executable(test_sq_stack test_code/test_stack_sq.c)
-target_sources(test_sq_stack PUBLIC stack/sq_stack.c)
+add_executable(test_stack_sq test_code/test_stack_sq.c)
+target_sources(test_stack_sq PUBLIC stack/sq_stack.c)
 #链栈测试
-add_executable(test_link_stack test_code/test_stack_link.c)
-target_sources(test_link_stack PUBLIC stack/link_stack.c)
+add_executable(test_stack_link test_code/test_stack_link.c)
+target_sources(test_stack_link PUBLIC stack/link_stack.c)
 #-------栈--------
+
+#-------队列--------
+#顺序队列测试
+add_executable(test_queue_sq test_code/test_queue_sq.c)
+target_sources(test_queue_sq PUBLIC queue/sq_queue.c)
+#-------队列--------
 
 #-------线性表--------
 # 单链表
@@ -19,7 +25,7 @@ add_executable(linear_list_link_double test_code/test_linear_list_link_double.c)
 target_sources(linear_list_link_double PUBLIC list/doubly_linked_list.c)
 
 # 顺序表
-add_executable(linear_list_sequence test_code/test_list_sequence.c)
-target_sources(linear_list_sequence PUBLIC list/sequence_list.c)
+add_executable(test_linear_list_sq test_code/test_linear_list_sq.c)
+target_sources(test_linear_list_sq PUBLIC list/sequence_list.c)
 
 #-------线性表--------

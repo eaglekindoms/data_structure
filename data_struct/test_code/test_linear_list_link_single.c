@@ -1,4 +1,4 @@
-#include "test_linear_list.c"
+#include "../list/test_linear_list.c"
 
 int main() {
     test_list();

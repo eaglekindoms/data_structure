@@ -1,10 +1,7 @@
 //
 // Created by eagle on 2021/5/28.
 //
-
 #include "stack.h"
-#include "stdio.h"
-#include "stdlib.h"
 
 typedef struct SNode {
     T data;

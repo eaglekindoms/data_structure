@@ -1,6 +1,8 @@
 #ifndef DATA_STRUCTURE_LINEAR_LIST_H
 #define DATA_STRUCTURE_LINEAR_LIST_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "error_code.h"
 
 typedef int T;

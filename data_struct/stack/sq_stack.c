@@ -2,8 +2,6 @@
 // Created by eagle on 2021/5/28.
 //
 #include "stack.h"
-#include "stdio.h"
-#include "stdlib.h"
 
 #define STACK_INIT_SIZE 100
 #define STACKINCREMET   10

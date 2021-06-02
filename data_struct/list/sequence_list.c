@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "linear_list.h"
 
 #define TABLE_INIT_SIZE 10
@@ -94,7 +92,7 @@ int isEmpty(List list) {
 }
 
 void clearList(List list) {
-
+    list->length = 0;
 }
 
 void printList(List table) {

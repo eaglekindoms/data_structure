@@ -1,9 +1,6 @@
 //
 // Created by eagle on 2021/5/30.
 //
-
-#include <stdio.h>
-#include <stdlib.h>
 #include "linear_list.h"
 
 typedef struct SNode {

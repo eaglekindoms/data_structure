@@ -30,5 +30,11 @@ target_sources(linear_list_link_double PUBLIC list/doubly_linked_list.c)
 # 顺序表
 add_executable(test_linear_list_sq test_code/test_linear_list_sq.c)
 target_sources(test_linear_list_sq PUBLIC list/sequence_list.c)
-
 #-------线性表--------
+
+#-------二叉树--------
+# 链式二叉树
+add_executable(test_binary_tree_link test_code/test_binary_tree_link.c)
+target_sources(test_binary_tree_link PUBLIC tree/link_binary_tree.c)
+
+#-------二叉树--------

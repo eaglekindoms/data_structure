@@ -8,6 +8,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "error_code.h"
+#include "boolean.h"
 
 typedef int T;
 typedef struct Tree_T *Tree;
@@ -23,6 +24,9 @@ void removeElem(Tree tree, T data);
 
 // 查找元素
 int searchElem(Tree tree, T data);
+
+// 获取根节点数据
+int getRoot(Tree tree);
 
 // 获取树元素总量
 int getLength(Tree tree);

@@ -9,8 +9,8 @@
       │                   20                │
       │             /           \           │
       │            9             27         │
-      │          /   \             \        │
-      │       2        12           38      │
+      │          /   \          /   \       │
+      │       2        12     22     38     │
       │     /   \        \         /        │
       │    1     4        13      30        │
       │         / \              /  \       │
@@ -43,13 +43,16 @@ int test_binary_tree()
     putElem(tree, 22);
     printf("\nCurrent Root: %d\n", getRoot(tree));
     printf("\nCurrent Height: %d\n", getHeight(tree));
+    printf("\nCurrent Length: %d\n", getLength(tree));
     removeElem(tree, 20);
     printf("\nCurrent Root: %d\n",getRoot(tree));
     printf("\nCurrent Height: %d\n", getHeight(tree));
     removeElem(tree, 6);
     printf("\nCurrent Height: %d\n", getHeight(tree));
+    printf("\nCurrent Length: %d\n", getLength(tree));
     preOrder(tree);
     inOrder(tree);
     postOrder(tree);
+    levelOrder(tree);
     return 0;
 }

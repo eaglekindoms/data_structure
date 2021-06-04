@@ -72,6 +72,7 @@ void putElem(Tree tree, T data)
     {
         tree->length++;
         tree->root = node;
+        return;
     }
     else
     {
@@ -81,12 +82,14 @@ void putElem(Tree tree, T data)
             node->parent = parent;
             parent->left = node;
             tree->length++;
+            return;
         }
         else if (data > parent->data)
         {
             node->parent = parent;
             parent->right = node;
             tree->length++;
+            return;
         }
     }
 }
@@ -273,4 +276,23 @@ void postOrder(Tree tree)
 void levelOrder(Tree tree)
 {
     printf("\n--- Level Order Traverse ---\n");
+    Node *temp[tree->length ];
+    int in = 0;
+    int out = 0;
+
+    temp[in++] = tree->root; //先保存二叉树根节点
+
+    while (in > out)
+    {
+        if (temp[out])
+        {
+            printf("%d ", temp[out]->data);
+            if(temp[out]->left!=NULL)
+                temp[in++] = temp[out]->left;
+            if(temp[out]->right!=NULL)
+                temp[in++] = temp[out]->right;
+        }
+        out++;
+    }
+    free(temp);
 }

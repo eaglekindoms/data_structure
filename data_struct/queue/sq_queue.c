@@ -1,4 +1,5 @@
 #include "queue.h"
+#include <string.h>
 
 #define QUEUE_INIT_SIZE 100
 #define QUEUE_INCREMET 10
@@ -16,6 +17,7 @@ Queue initQueue()
 {
     Queue queue = (Queue)malloc(sizeof(Queue));
     queue->font = (T *)malloc(QUEUE_INIT_SIZE * sizeof(T));
+    memset(queue->font, NULL, QUEUE_INIT_SIZE * sizeof(T));
     if (!queue->font)
         exit(ERROR_MALLOC_FAILED);
     queue->tail = queue->font;

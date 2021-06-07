@@ -276,7 +276,7 @@ void postOrder(Tree tree)
 void levelOrder(Tree tree)
 {
     printf("\n--- Level Order Traverse ---\n");
-    Node *temp[tree->length ];
+    Node *temp[tree->length];
     int in = 0;
     int out = 0;
 
@@ -287,9 +287,9 @@ void levelOrder(Tree tree)
         if (temp[out])
         {
             printf("%d ", temp[out]->data);
-            if(temp[out]->left!=NULL)
+            if (temp[out]->left != NULL)
                 temp[in++] = temp[out]->left;
-            if(temp[out]->right!=NULL)
+            if (temp[out]->right != NULL)
                 temp[in++] = temp[out]->right;
         }
         out++;

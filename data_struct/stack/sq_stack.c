@@ -2,6 +2,7 @@
 // Created by eagle on 2021/5/28.
 //
 #include "stack.h"
+#include <string.h>
 
 #define STACK_INIT_SIZE 100
 #define STACKINCREMET   10
@@ -16,6 +17,7 @@ struct Stack_T {
 Stack initStack() {
     Stack stack = (Stack) malloc(sizeof(Stack));
     stack->base = (T *) malloc(STACK_INIT_SIZE * sizeof(T));
+    memset(stack->base, NULL, STACK_INIT_SIZE * sizeof(T));
     if (!stack->base) exit(ERROR_MALLOC_FAILED);
     stack->top = stack->base;
     stack->capacity = STACK_INIT_SIZE;

@@ -23,6 +23,10 @@ target_sources(test_queue_link PUBLIC queue/link_queue.c)
 add_executable(linear_list_link_single test_code/test_linear_list_link_single.c)
 target_sources(linear_list_link_single PUBLIC list/singly_linked_list.c)
 
+# 静态单链表
+add_executable(linear_list_link_static test_code/test_linear_list_link_static.c)
+target_sources(linear_list_link_static PUBLIC list/static_linked_list.c)
+
 # 双链表
 add_executable(linear_list_link_double test_code/test_linear_list_link_double.c)
 target_sources(linear_list_link_double PUBLIC list/doubly_linked_list.c)

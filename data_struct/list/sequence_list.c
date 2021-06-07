@@ -1,4 +1,5 @@
 #include "linear_list.h"
+#include <string.h>
 
 #define TABLE_INIT_SIZE 10
 #define TABLE_INCREMENT 5
@@ -12,6 +13,7 @@ struct linear_list {
 List initList() {
     List t = (List) malloc(sizeof(List));
     t->head = (T *) malloc(TABLE_INIT_SIZE * sizeof(T));
+    memset(t->head, NULL, TABLE_INIT_SIZE * sizeof(T)); 
     if (!t->head) {
         printf("---malloc memory failed---\n");
         exit(ERROR_MALLOC_FAILED);

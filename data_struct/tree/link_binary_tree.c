@@ -4,56 +4,67 @@
 
 #include "binary_tree.h"
 
-typedef struct BNode
-{
+typedef struct BNode {
     T data;
-    struct BNode *parent;
+//    struct BNode *parent;
     struct BNode *left;
     struct BNode *right;
 } Node;
 
-struct Tree_T
-{
+struct Tree_T {
     Node *root;
     int length;
 };
 
 // 初始化二叉树
-Tree initTree()
-{
-    Tree tree = (Tree)malloc(sizeof(Tree));
+Tree initTree() {
+    Tree tree = (Tree) malloc(sizeof(Tree));
     tree->root = NULL;
     tree->length = 0;
     return tree;
 }
 
-// 查找父节点
+// 查找节点
 /**
  * if data==node.data return node
  * */
-Node *findParentNode(Tree tree, T data)
-{
-    if (tree->root == NULL)
-    {
+Node *findNode(Tree tree, T data) {
+    if (tree->root == NULL) {
         exit(ERROR_NULL_PTR);
     }
     Node *curr = tree->root;
-    while (curr != NULL)
-    {
-        if (data > curr->data)
-        {
+    while (curr != NULL) {
+        if (data > curr->data) {
             if (curr->right == NULL)
                 return curr;
             curr = curr->right;
-        }
-        else if (data < curr->data)
-        {
+        } else if (data < curr->data) {
             if (curr->left == NULL)
                 return curr;
             curr = curr->left;
+        } else {
+            return curr;
         }
-        else
-        {
+    }
+    return NULL;
+}
+
+// 返回父节点
+Node *findParent(Tree tree, T data) {
+    if (tree->root == NULL) {
+        exit(ERROR_NULL_PTR);
+    }
+    Node *curr = tree->root;
+    while (curr != NULL) {
+        if (data > curr->data) {
+            if (curr->right->data == data)
+                return curr;
+            curr = curr->right;
+        } else if (data < curr->data) {
+            if (curr->left->data == data)
+                return curr;
+            curr = curr->left;
+        } else {
             return curr;
         }
     }
@@ -61,32 +72,25 @@ Node *findParentNode(Tree tree, T data)
 }
 
 // 插入元素
-void putElem(Tree tree, T data)
-{
-    Node *node = (Node *)malloc(sizeof(Node));
+void putElem(Tree tree, T data) {
+    Node *node = (Node *) malloc(sizeof(Node));
     node->data = data;
-    node->parent = NULL;
+//    node->parent = NULL;
     node->left = NULL;
     node->right = NULL;
-    if (tree->root == NULL)
-    {
+    if (tree->root == NULL) {
         tree->length++;
         tree->root = node;
         return;
-    }
-    else
-    {
-        Node *parent = findParentNode(tree, data);
-        if (data < parent->data)
-        {
-            node->parent = parent;
+    } else {
+        Node *parent = findNode(tree, data);
+        if (data < parent->data) {
+//            node->parent = parent;
             parent->left = node;
             tree->length++;
             return;
-        }
-        else if (data > parent->data)
-        {
-            node->parent = parent;
+        } else if (data > parent->data) {
+//            node->parent = parent;
             parent->right = node;
             tree->length++;
             return;
@@ -94,137 +98,107 @@ void putElem(Tree tree, T data)
     }
 }
 
-void removeElemNode(Node *node, T data)
-{
-    if (node == NULL)
-    {
+void removeElemNode(Tree tree, Node *node, T data) {
+    if (node == NULL) {
         return;
     }
 
-    if (node->data == data)
-    {
-        if (node->left == NULL)
-        {
+    if (node->data == data) {
+        if (node->left == NULL) {
             Node *temp = node;
             node = temp->right;
-            if (node != NULL)
-            {
-                node->parent = temp->parent;
+            Node *parent = findParent(tree, temp->data);
+
+            if (parent != temp) {
+                if (parent->left->data == temp->data) {
+                    parent->left = node;
+                } else {
+                    parent->right = node;
+                }
             }
-            if (temp->parent->left->data == temp->data)
-            {
-                temp->parent->left = node;
-            }
-            else
-            {
-                temp->parent->right = node;
-            }
+
             free(temp);
             return;
-        }
-        else if (node->right == NULL)
-        {
+        } else if (node->right == NULL) {
             Node *temp = node;
             node = temp->left;
-            if (node != NULL)
-            {
-                node->parent = temp->parent;
-            }
-            if (temp->parent->left->data == temp->data)
-            {
-                temp->parent->left = node;
-            }
-            else
-            {
-                temp->parent->right = node;
+            Node *parent = findParent(tree, temp->data);
+
+            if (parent != temp) {
+                if (parent->left->data == temp->data) {
+                    parent->left = node;
+                } else {
+                    parent->right = node;
+                }
             }
             free(temp);
             return;
-        }
-        else
-        {
+        } else {
             // 只有子树非空，获取右子树的最小值
             // 替换待删除节点的值，
             // 然后删除该右子树的最小值(最小值的左子树必为空)
             // 运用递归的思路
             Node *temp = node->right;
-            while (temp->left)
-            {
+            while (temp->left) {
                 temp = temp->left;
             }
             node->data = temp->data;
-            removeElemNode(node->right, temp->data);
+            removeElemNode(tree, node->right, temp->data);
         }
-    }
-    else if (node->data > data)
-    {
-        removeElemNode(node->left, data);
-    }
-    else if (node->data < data)
-    {
-        removeElemNode(node->right, data);
+    } else if (node->data > data) {
+        removeElemNode(tree, node->left, data);
+    } else if (node->data < data) {
+        removeElemNode(tree, node->right, data);
     }
 }
 
 // 移除元素
-void removeElem(Tree tree, T data)
-{
-    Node *node = findParentNode(tree, data);
-    if (node == NULL || node->data != data)
-    {
+void removeElem(Tree tree, T data) {
+    Node *node = findNode(tree, data);
+    if (node == NULL || node->data != data) {
         printf("\n---don't find element---\n");
         return;
     }
-    removeElemNode(node, data);
+    removeElemNode(tree, node, data);
     tree->length--;
 }
 
 // 查找元素
-int searchElem(Tree tree, T data)
-{
-    Node *node = findParentNode(tree, data);
-    if (node != NULL && data == node->data)
-    {
+int searchElem(Tree tree, T data) {
+    Node *node = findNode(tree, data);
+    if (node != NULL && data == node->data) {
         return TRUE;
-    }
-    else
-    {
+    } else {
         return FALSE;
     }
 }
 
 // 获取根节点数据
-int getRoot(Tree tree)
-{
+int getRoot(Tree tree) {
     return tree->root->data;
 }
 
 // 获取树元素总量
-int getLength(Tree tree)
-{
+int getLength(Tree tree) {
     return tree->length;
 }
 
-int getNodeHeight(Node *node)
-{
-    if (node == NULL)
-    {
+int getNodeHeight(Node *node) {
+    if (node == NULL) {
         return 0;
     }
     int left = getNodeHeight(node->left);
     int right = getNodeHeight(node->right);
     return (left > right) ? left + 1 : right + 1;
 }
+
 // 获取树高
-int getHeight(Tree tree)
-{
+int getHeight(Tree tree) {
     getNodeHeight(tree->root);
 }
 
-void preOrderNode(Node *node)
-{
-    if (node != NULL)
-    {
+void preOrderNode(Node *node) {
+    if (node != NULL) {
         printf("%d ", node->data);
         preOrderNode(node->left);
         preOrderNode(node->right);
@@ -232,16 +206,13 @@ void preOrderNode(Node *node)
 }
 
 // 先序遍历
-void preOrder(Tree tree)
-{
+void preOrder(Tree tree) {
     printf("\n--- Pre Order Traverse ---\n");
     preOrderNode(tree->root);
 }
 
-void inOrderNode(Node *node)
-{
-    if (node != NULL)
-    {
+void inOrderNode(Node *node) {
+    if (node != NULL) {
         inOrderNode(node->left);
         printf("%d ", node->data);
         inOrderNode(node->right);
@@ -249,16 +220,13 @@ void inOrderNode(Node *node)
 }
 
 // 中序遍历
-void inOrder(Tree tree)
-{
+void inOrder(Tree tree) {
     printf("\n--- In Order Traverse ---\n");
     inOrderNode(tree->root);
 }
 
-void postOrderNode(Node *node)
-{
-    if (node != NULL)
-    {
+void postOrderNode(Node *node) {
+    if (node != NULL) {
         postOrderNode(node->left);
         postOrderNode(node->right);
         printf("%d ", node->data);
@@ -266,15 +234,13 @@ void postOrderNode(Node *node)
 }
 
 // 后序遍历
-void postOrder(Tree tree)
-{
+void postOrder(Tree tree) {
     printf("\n--- Post Order Traverse ---\n");
     postOrderNode(tree->root);
 }
 
 // 层序遍历
-void levelOrder(Tree tree)
-{
+void levelOrder(Tree tree) {
     printf("\n--- Level Order Traverse ---\n");
     Node *temp[tree->length];
     int in = 0;
@@ -282,10 +248,8 @@ void levelOrder(Tree tree)
 
     temp[in++] = tree->root; //先保存二叉树根节点
 
-    while (in > out)
-    {
-        if (temp[out])
-        {
+    while (in > out) {
+        if (temp[out]) {
             printf("%d ", temp[out]->data);
             if (temp[out]->left != NULL)
                 temp[in++] = temp[out]->left;

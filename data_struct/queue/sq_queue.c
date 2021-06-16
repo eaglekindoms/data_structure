@@ -1,5 +1,5 @@
 #include "queue.h"
-#include <string.h>
+#include <memory.h>
 
 #define QUEUE_INIT_SIZE 100
 #define QUEUE_INCREMET 10

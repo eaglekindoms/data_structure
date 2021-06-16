@@ -2,7 +2,7 @@
 // Created by eagle on 2021/5/28.
 //
 #include "stdio.h"
-#include "stack.h"
+#include "../stack/stack.h"
 
 int testStack() {
     Stack stack = initStack();

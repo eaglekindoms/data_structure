@@ -1,6 +1,6 @@
-#include "queue.h"
+#include "../queue/queue.h"
 
-int test_queue()
+int main()
 {
     Queue queue = initQueue();
     printf("\n --- EN QUEUE --- \n");

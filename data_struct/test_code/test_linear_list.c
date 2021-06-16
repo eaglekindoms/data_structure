@@ -1,7 +1,7 @@
-#include "linear_list.h"
+#include "../list/linear_list.h"
 #include "stdio.h"
 
-int test_list() {
+int main() {
     printf("\nTest Init List\n");
     List list = initList();
     addElem(list, 1);

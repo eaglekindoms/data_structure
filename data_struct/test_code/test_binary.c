@@ -2,7 +2,7 @@
 // Created by eagle on 2021/6/2.
 //
 
-#include "binary_tree.h"
+#include "../tree/binary_tree.h"
 
 /* 
       ┌─────────────────────────────────────┐
@@ -21,7 +21,7 @@
       │             6                       │
       └─────────────────────────────────────┘
 */
-int test_binary_tree()
+int main()
 {
     Tree tree = initTree();
     putElem(tree, 20);

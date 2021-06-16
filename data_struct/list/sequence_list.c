@@ -1,5 +1,5 @@
 #include "linear_list.h"
-#include <string.h>
+#include <memory.h>
 
 #define TABLE_INIT_SIZE 10
 #define TABLE_INCREMENT 5

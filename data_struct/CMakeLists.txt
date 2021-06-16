@@ -4,6 +4,7 @@ add_compile_options(-fexec-charset=GBK)
 #顺序栈测试
 add_executable(test_stack_sq test_code/test_stack.c)
 target_sources(test_stack_sq PUBLIC stack/sq_stack.c)
+
 #链栈测试
 add_executable(test_stack_link test_code/test_stack.c)
 target_sources(test_stack_link PUBLIC stack/link_stack.c)
@@ -13,9 +14,17 @@ target_sources(test_stack_link PUBLIC stack/link_stack.c)
 #顺序队列测试
 add_executable(test_queue_sq test_code/test_queue.c)
 target_sources(test_queue_sq PUBLIC queue/sq_queue.c)
+
+#顺序循环队列测试
+add_executable(test_queue_sq_circular test_code/test_queue.c)
+target_sources(test_queue_sq_circular PUBLIC queue/sq_circular_queue.c)
+
 #链式队列测试
 add_executable(test_queue_link test_code/test_queue.c)
 target_sources(test_queue_link PUBLIC queue/link_queue.c)
+
+#双端队列测试
+add_executable(test_queue_double_end test_code/test_queue_double_end.c)
 #-------队列--------
 
 #-------线性表--------

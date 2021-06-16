@@ -19,21 +19,21 @@ struct linear_list {
 List initList() {
     List list = (List) malloc(sizeof(List));
     list->head = (Node *) malloc(sizeof(Node));
-    list->head->next=list->head;
+    list->head->next = list->head;
     list->length = 0;
     return list;
 }
 
 // 获取尾节点
-Node *getTailNode(List list){
+Node *getTailNode(List list) {
     Node *temp = list->head->next;
-    Node *tail=NULL;
-    while (temp){
-        if(temp->next==list->head->next){
-            tail= temp;
+    Node *tail = NULL;
+    while (temp) {
+        if (temp->next == list->head->next) {
+            tail = temp;
             break;
         }
-        temp=temp->next;
+        temp = temp->next;
     }
     return tail;
 }
@@ -69,14 +69,14 @@ void addElem(List list, T data) {
     node->next = NULL;
     if (list->length == 0) {
         list->head->next = node;
-        node->next=list->head->next;
+        node->next = list->head->next;
         list->length++;
         return;
     }
 
     Node *tail = getTailNode(list);
-    node->next=tail->next;
-    tail->next=node;
+    node->next = tail->next;
+    tail->next = node;
     list->length++;
 }
 

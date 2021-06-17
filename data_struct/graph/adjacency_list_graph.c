@@ -21,10 +21,10 @@ typedef struct EdgeNode {
 typedef struct VertexNode {
     T data;// 顶点的数据域
     ENode firstEdge;// 指向邻接点的指针
-} *VNode;
+} VNode;
 
 struct Graph_T {
-    VNode vertices;// 图中顶点的数组
+    VNode *vertices;// 图中顶点的数组
     int vertex_num;// 记录图中顶点数
     int edge_num;// 记录图中边数
     int capacity;// 容量
@@ -33,7 +33,7 @@ struct Graph_T {
 // 初始化图
 Graph initGraph() {
     Graph graph = (Graph) malloc(sizeof(Graph));
-    graph->vertices = (VNode) malloc(GRAPH_INIT_SIZE * sizeof(VNode));
+    graph->vertices = (VNode *) malloc(GRAPH_INIT_SIZE * sizeof(VNode));
     memset(graph->vertices, 0, GRAPH_INIT_SIZE * sizeof(VNode));
     graph->edge_num = 0;
     graph->vertex_num = 0;
@@ -42,8 +42,8 @@ Graph initGraph() {
 }
 
 // 创建顶点
-VNode createVertex(T data) {
-    VNode vertex = (VNode) malloc(sizeof(VNode));
+VNode *createVertex(T data) {
+    VNode *vertex = (VNode *) malloc(sizeof(VNode));
     vertex->data = data;
     vertex->firstEdge = NULL;
     return vertex;
@@ -53,7 +53,7 @@ VNode createVertex(T data) {
 int saveVertex(Graph graph, T data) {
     // 扩容
     if (graph->vertex_num >= graph->capacity) {
-        graph->vertices = (VNode) realloc(graph->vertices, GRAPH_INCREMENT * sizeof(VNode));
+        graph->vertices = (VNode *) realloc(graph->vertices, GRAPH_INCREMENT * sizeof(VNode));
         if (!graph->vertices) {
             printf("---malloc memory failed---\n");
             exit(ERROR_MALLOC_FAILED);
@@ -80,7 +80,7 @@ int getVertex(Graph graph, T data) {
 }
 
 // 判断边是否存在
-int isExistedEdge(VNode vertex, int toIndex) {
+int isExistedEdge(VNode *vertex, int toIndex) {
     ENode edge = vertex->firstEdge;
     while (edge != NULL) {
         if (edge->vertexIndex == toIndex) {
@@ -112,7 +112,7 @@ void addEdge(Graph graph, T from, T to) {
     if (toIndex == -1) {
         toIndex = saveVertex(graph, to);
     }
-    VNode fromVertex = &graph->vertices[fromIndex];
+    VNode *fromVertex = &graph->vertices[fromIndex];
     if (TRUE == isExistedEdge(fromVertex, toIndex)) {
         printf("\n---repeat edge---\n");
         return;
@@ -142,7 +142,7 @@ void removeEdge(Graph graph, T from, T to) {
         printf("\n--- vertex dosen't exist ---\n");
         return;
     }
-    VNode fromVertex = &graph->vertices[fromIndex];
+    VNode *fromVertex = &graph->vertices[fromIndex];
     if (FALSE == isExistedEdge(fromVertex, toIndex)) {
         printf("\n--- edge dosen't exist ---\n");
         return;

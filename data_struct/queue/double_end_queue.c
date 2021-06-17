@@ -36,7 +36,7 @@ Queue initQueue() {
 // 判断队列是否满了
 void isFull(Queue queue) {
     if ((queue->tail + 1) % queue->capacity == queue->font) {
-        printf("\n---- 队列已满 ---\n");
+        printf("\n---- full queue ---\n");
         exit(ERROR_FULL_SPACE);
     }
 }

@@ -5,7 +5,7 @@
 #include "graph.h"
 #include "memory.h"
 
-#define GRAPH_INIT_SIZE 100
+#define GRAPH_INIT_SIZE 10
 #define GRAPH_INCREMENT 10
 
 typedef int W;    // 边权值
@@ -14,7 +14,7 @@ typedef int W;    // 边权值
 typedef struct EdgeNode {
     int vertexIndex; // 顶点下标
     struct EdgeNode *nextEdge;// 指向下一个邻接点的指针
-    W *weight;// 权重
+    W weight;// 权重
 } *ENode;
 
 // 顶点节点
@@ -24,7 +24,7 @@ typedef struct VertexNode {
 } *VNode;
 
 struct Graph_T {
-    VNode *vertices;// 图中顶点的数组
+    VNode vertices;// 图中顶点的数组
     int vertex_num;// 记录图中顶点数
     int edge_num;// 记录图中边数
     int capacity;// 容量
@@ -34,7 +34,7 @@ struct Graph_T {
 Graph initGraph() {
     Graph graph = (Graph) malloc(sizeof(Graph));
     graph->vertices = (VNode) malloc(GRAPH_INIT_SIZE * sizeof(VNode));
-    memset(graph->vertices, NULL, GRAPH_INIT_SIZE * sizeof(VNode));
+    memset(graph->vertices, 0, GRAPH_INIT_SIZE * sizeof(VNode));
     graph->edge_num = 0;
     graph->vertex_num = 0;
     graph->capacity = GRAPH_INIT_SIZE;
@@ -46,20 +46,21 @@ VNode createVertex(T data) {
     VNode vertex = (VNode) malloc(sizeof(VNode));
     vertex->data = data;
     vertex->firstEdge = NULL;
+    return vertex;
 }
 
 // 储存顶点数据到顶点数组中
 int saveVertex(Graph graph, T data) {
     // 扩容
     if (graph->vertex_num >= graph->capacity) {
-        graph->vertices = (T *) realloc(graph->vertices, GRAPH_INCREMENT * sizeof(VNode));
+        graph->vertices = (VNode) realloc(graph->vertices, GRAPH_INCREMENT * sizeof(VNode));
         if (!graph->vertices) {
             printf("---malloc memory failed---\n");
             exit(ERROR_MALLOC_FAILED);
         }
         graph->capacity += GRAPH_INCREMENT;
     }
-    graph->vertices[graph->vertex_num] = createVertex(data);
+    graph->vertices[graph->vertex_num] = *createVertex(data);
     int index = graph->vertex_num;
     graph->vertex_num++;
     return index;
@@ -69,7 +70,7 @@ int saveVertex(Graph graph, T data) {
 int getVertex(Graph graph, T data) {
     int index = -1;
     for (int i = 0; i < graph->vertex_num; ++i) {
-        T temp = graph->vertices[i]->data;
+        T temp = graph->vertices[i].data;
         if (temp == data) {
             index = i;
             break;
@@ -111,13 +112,13 @@ void addEdge(Graph graph, T from, T to) {
     if (toIndex == -1) {
         toIndex = saveVertex(graph, to);
     }
-    VNode fromVertex = graph->vertices[fromIndex];
+    VNode fromVertex = &graph->vertices[fromIndex];
     if (TRUE == isExistedEdge(fromVertex, toIndex)) {
         printf("\n---repeat edge---\n");
         return;
     }
     // 初始化边节点
-    ENode edge = createENode(toIndex, NULL);
+    ENode edge = createENode(toIndex, 0);
     if (fromVertex->firstEdge == NULL) {
         fromVertex->firstEdge = edge;
         graph->edge_num++;
@@ -141,7 +142,7 @@ void removeEdge(Graph graph, T from, T to) {
         printf("\n--- vertex dosen't exist ---\n");
         return;
     }
-    VNode fromVertex = graph->vertices[fromIndex];
+    VNode fromVertex = &graph->vertices[fromIndex];
     if (FALSE == isExistedEdge(fromVertex, toIndex)) {
         printf("\n--- edge dosen't exist ---\n");
         return;
@@ -179,10 +180,10 @@ void BFS(Graph graph) {
 void printGraph(Graph graph) {
     printf("\n--- PRINT GRAPH ---\n");
     for (int i = 0; i < graph->vertex_num; ++i) {
-        printf("vertex: %d ", graph->vertices[i]->data);
-        ENode edge = graph->vertices[i]->firstEdge;
+        printf("vertex: %d ", graph->vertices[i].data);
+        ENode edge = graph->vertices[i].firstEdge;
         while (edge) {
-            printf(" -> %d", graph->vertices[edge->vertexIndex]->data);
+            printf(" -> %d", graph->vertices[edge->vertexIndex].data);
             edge = edge->nextEdge;
         }
         printf("\n");

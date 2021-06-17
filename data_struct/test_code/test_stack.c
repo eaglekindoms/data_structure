@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "../stack/stack.h"
 
-int testStack() {
+int main() {
     Stack stack = initStack();
     pushStack(stack, 1);
     pushStack(stack, 2);

@@ -4,8 +4,8 @@
 #include "stack.h"
 #include <memory.h>
 
-#define STACK_INIT_SIZE 100
-#define STACK_INCREMENT   10
+#define STACK_INIT_SIZE 10
+#define STACK_INCREMENT 10
 
 struct Stack_T {
     T *top;
@@ -17,7 +17,7 @@ struct Stack_T {
 Stack initStack() {
     Stack stack = (Stack) malloc(sizeof(Stack));
     stack->base = (T *) malloc(STACK_INIT_SIZE * sizeof(T));
-    memset(stack->base, NULL, STACK_INIT_SIZE * sizeof(T));
+    memset(stack->base, 0, STACK_INIT_SIZE * sizeof(T));
     if (!stack->base) exit(ERROR_MALLOC_FAILED);
     stack->top = stack->base;
     stack->capacity = STACK_INIT_SIZE;

@@ -20,7 +20,7 @@ struct Queue_T {
 Queue initQueue() {
     Queue queue = (Queue) malloc(sizeof(Queue));
     queue->rawData = (T *) malloc(QUEUE_INIT_SIZE * sizeof(T));
-    memset(queue->rawData, NULL, QUEUE_INIT_SIZE * sizeof(T));
+    memset(queue->rawData, 0, QUEUE_INIT_SIZE * sizeof(T));
     if (!queue->rawData)
         exit(ERROR_MALLOC_FAILED);
     queue->tail = queue->font = 0;
@@ -32,7 +32,7 @@ Queue initQueue() {
 // 队尾插入元素
 void enQueue(Queue queue, T data) {
     if ((queue->tail + 1) % queue->capacity == queue->font) {
-        printf("\n---- 队列已满 ---\n");
+        printf("\n---- full queue ---\n");
         exit(ERROR_FULL_SPACE);
     }
     queue->rawData[queue->tail % queue->capacity] = data;

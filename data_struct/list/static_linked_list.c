@@ -22,7 +22,7 @@ List initList()
 {
     List list = (List)malloc(sizeof(List));
     list->head = (RawData *)malloc(LIST_INIT_SIZE * sizeof(RawData));
-    memset(list->head, NULL, LIST_INIT_SIZE * sizeof(RawData));
+    memset(list->head, 0, LIST_INIT_SIZE * sizeof(RawData));
     if (!list->head)
     {
         printf("---malloc memory failed---\n");

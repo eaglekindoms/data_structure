@@ -1,7 +1,7 @@
 #include "queue.h"
 #include <memory.h>
 
-#define QUEUE_INIT_SIZE 100
+#define QUEUE_INIT_SIZE 10
 #define QUEUE_INCREMENT 10
 
 struct Queue_T
@@ -17,7 +17,7 @@ Queue initQueue()
 {
     Queue queue = (Queue)malloc(sizeof(Queue));
     queue->font = (T *)malloc(QUEUE_INIT_SIZE * sizeof(T));
-    memset(queue->font, NULL, QUEUE_INIT_SIZE * sizeof(T));
+    memset(queue->font, 0, QUEUE_INIT_SIZE * sizeof(T));
     if (!queue->font)
         exit(ERROR_MALLOC_FAILED);
     queue->tail = queue->font;

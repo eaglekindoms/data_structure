@@ -5,7 +5,7 @@
 #include <memory.h>
 
 #define STACK_INIT_SIZE 100
-#define STACKINCREMET   10
+#define STACK_INCREMENT   10
 
 struct Stack_T {
     T *top;
@@ -31,10 +31,10 @@ int getLength(Stack s) {
 
 void pushStack(Stack s, T data) {
     if (s->top - s->base >= s->capacity) {
-        s->base = (T *) realloc(s->base, (s->capacity + STACKINCREMET) * sizeof(T));
+        s->base = (T *) realloc(s->base, (s->capacity + STACK_INCREMENT) * sizeof(T));
         if (!s->base) exit(ERROR_MALLOC_FAILED);
         s->top = s->base + s->capacity;
-        s->capacity += STACKINCREMET;
+        s->capacity += STACK_INCREMENT;
     }
     *(s->top) = data;
     s->top++;

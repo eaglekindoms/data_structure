@@ -28,4 +28,7 @@ void DFS(Graph graph);
 // BFS 广度优先搜索
 void BFS(Graph graph);
 
+// 打印图
+void printGraph(Graph graph);
+
 #endif //DATA_STRUCTURE_GRAPH_H

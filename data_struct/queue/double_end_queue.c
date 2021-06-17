@@ -17,6 +17,7 @@ struct Queue_T {
     int tail;
     T *rawData;
     int length;
+    int capacity;
 };
 
 // 初始化队列
@@ -28,12 +29,13 @@ Queue initQueue() {
         exit(ERROR_MALLOC_FAILED);
     queue->tail = queue->font = 0;
     queue->length = 0;
+    queue->capacity = QUEUE_INIT_SIZE;
     return queue;
 }
 
 // 判断队列是否满了
 void isFull(Queue queue) {
-    if ((queue->tail + 1) % QUEUE_INIT_SIZE == queue->font) {
+    if ((queue->tail + 1) % queue->capacity == queue->font) {
         printf("\n---- 队列已满 ---\n");
         exit(ERROR_FULL_SPACE);
     }
@@ -49,7 +51,7 @@ void enQueueR(Queue queue, T data) {
     isFull(queue);
     queue->rawData[queue->tail] = data;
     // 顺时针旋转
-    queue->tail = (queue->tail + 1) % QUEUE_INIT_SIZE;
+    queue->tail = (queue->tail + 1) % queue->capacity;
     queue->length++;
 }
 
@@ -57,7 +59,7 @@ void enQueueR(Queue queue, T data) {
 void enQueueL(Queue queue, T data) {
     isFull(queue);
     // 逆时针旋转
-    queue->font = (--queue->font + QUEUE_INIT_SIZE) % QUEUE_INIT_SIZE;
+    queue->font = (--queue->font + queue->capacity) % queue->capacity;
     queue->rawData[queue->font] = data;
     queue->length++;
 }
@@ -67,7 +69,7 @@ T deQueueR(Queue queue) {
     if (isEmpty(queue))
         exit(ERROR_NULL_PTR);
     // 逆时针旋转
-    queue->tail = (--queue->tail + QUEUE_INIT_SIZE) % QUEUE_INIT_SIZE;
+    queue->tail = (--queue->tail + queue->capacity) % queue->capacity;
     T data = queue->rawData[queue->tail];
     queue->rawData[queue->tail] = NULL;
     queue->length--;
@@ -80,7 +82,7 @@ T deQueueL(Queue queue) {
     T data = queue->rawData[queue->font];
     queue->rawData[queue->font] = NULL;
     // 顺时针旋转
-    queue->font = (queue->font + 1) % QUEUE_INIT_SIZE;
+    queue->font = (queue->font + 1) % queue->capacity;
     queue->length--;
     printf("DeQueue data: %d \n", data);
     return data;
@@ -88,14 +90,14 @@ T deQueueL(Queue queue) {
 
 //获取右端头元素
 T peekFontR(Queue queue) {
-    if (queue->tail % QUEUE_INIT_SIZE == queue->font)
+    if (queue->tail % queue->capacity == queue->font)
         exit(ERROR_NULL_PTR);
     return queue->rawData[queue->tail];
 }
 
 //获取左端头元素
 T peekFontL(Queue queue) {
-    if (queue->tail % QUEUE_INIT_SIZE == queue->font)
+    if (queue->tail % queue->capacity == queue->font)
         exit(ERROR_NULL_PTR);
     return queue->rawData[queue->font];
 }
@@ -118,7 +120,7 @@ void printQueue(Queue queue) {
         return;
     }
     printf("\n--- Print SQ Queue ---\n");
-    for (int i = 0; i < QUEUE_INIT_SIZE; ++i) {
+    for (int i = 0; i < queue->capacity; ++i) {
         if (queue->rawData[i] != NULL) {
             printf(" %d", queue->rawData[i]);
         }

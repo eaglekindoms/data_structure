@@ -55,3 +55,9 @@ add_executable(test_binary_tree_link test_code/test_binary.c)
 target_sources(test_binary_tree_link PUBLIC tree/link_binary_tree.c)
 
 #-------二叉树--------
+
+#-------图--------
+# 基于邻接表的图
+add_executable(test_graph_adjacency_list test_code/test_graph.c)
+target_sources(test_graph_adjacency_list PUBLIC graph/adjacency_list_graph.c)
+#-------图--------

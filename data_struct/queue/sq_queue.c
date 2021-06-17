@@ -2,7 +2,7 @@
 #include <memory.h>
 
 #define QUEUE_INIT_SIZE 100
-#define QUEUE_INCREMET 10
+#define QUEUE_INCREMENT 10
 
 struct Queue_T
 {
@@ -31,11 +31,11 @@ void enQueue(Queue queue, T data)
 {
     if (queue->tail - queue->font >= queue->capacity)
     {
-        queue->font = (T *)realloc(queue->font, (queue->capacity + QUEUE_INCREMET) * sizeof(T));
+        queue->font = (T *)realloc(queue->font, (queue->capacity + QUEUE_INCREMENT) * sizeof(T));
         if (!queue->font)
             exit(ERROR_MALLOC_FAILED);
         queue->tail = queue->font + queue->capacity;
-        queue->capacity += QUEUE_INCREMET;
+        queue->capacity += QUEUE_INCREMENT;
     }
     *(queue->tail) = data;
     queue->tail++;

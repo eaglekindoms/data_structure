@@ -32,6 +32,7 @@ int main() {
     addEdge(graph, 8, 9);
     addEdge(graph, 10, 9);
     printGraph(graph);
+    DFS(graph);
     removeEdge(graph, 2, 1);
     removeEdge(graph, 2, 1);
     removeEdge(graph, 2, 4);

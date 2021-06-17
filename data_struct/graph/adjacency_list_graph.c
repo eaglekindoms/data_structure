@@ -166,9 +166,32 @@ void removeEdge(Graph graph, T from, T to) {
     }
 }
 
+// 递归遍历
+void DFSTraverse(Graph graph, int *visit_arr,int index)
+{
+    visit_arr[index] = TRUE;
+    printf("%d -> ",graph->vertices[index].data);
+    ENode edge=graph->vertices[index].firstEdge;
+    while (edge!=NULL)
+    {
+        if (visit_arr[edge->vertexIndex]==FALSE)
+            DFSTraverse( graph, visit_arr,edge->vertexIndex);
+        edge=edge->nextEdge;
+    } 
+}
+
 // DFS 深度优先搜索
 void DFS(Graph graph) {
-
+    // 判断顶点是否已被遍历
+    int visit_arr[graph->vertex_num];
+    memset(visit_arr, 0, sizeof(visit_arr));
+    printf("\n--- DFS ---\n");
+    for (int i = 0; i < graph->vertex_num; i++)
+    {
+        if(visit_arr[i]==FALSE)
+            DFSTraverse(graph,&visit_arr,i);
+    }
+    printf("\n--- DONE ---\n");
 }
 
 // BFS 广度优先搜索

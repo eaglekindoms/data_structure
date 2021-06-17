@@ -60,4 +60,5 @@ target_sources(test_binary_tree_link PUBLIC tree/link_binary_tree.c)
 # 基于邻接表的图
 add_executable(test_graph_adjacency_list test_code/test_graph.c)
 target_sources(test_graph_adjacency_list PUBLIC graph/adjacency_list_graph.c)
+target_sources(test_graph_adjacency_list PUBLIC queue/sq_circular_queue.c)
 #-------图--------

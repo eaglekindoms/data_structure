@@ -33,9 +33,10 @@ int main() {
     addEdge(graph, 10, 9);
     printGraph(graph);
     DFS(graph);
-    removeEdge(graph, 2, 1);
-    removeEdge(graph, 2, 1);
-    removeEdge(graph, 2, 4);
-    printGraph(graph);
+    BFS(graph);
+//    removeEdge(graph, 2, 1);
+//    removeEdge(graph, 2, 1);
+//    removeEdge(graph, 2, 4);
+//    printGraph(graph);
     return 0;
 }

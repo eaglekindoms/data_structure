@@ -47,7 +47,7 @@ T deQueue(Queue queue) {
     T data = queue->rawData[queue->font];
     queue->font = (queue->font + 1) % queue->capacity;
     queue->length--;
-    printf("DeQueue data: %d \n", data);
+//    printf("DeQueue data: %d \n", data);
     return data;
 }
 

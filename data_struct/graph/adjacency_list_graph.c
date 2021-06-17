@@ -4,6 +4,7 @@
 
 #include "graph.h"
 #include "memory.h"
+#include "../queue/queue.h"
 
 #define GRAPH_INIT_SIZE 10
 #define GRAPH_INCREMENT 10
@@ -166,37 +167,65 @@ void removeEdge(Graph graph, T from, T to) {
     }
 }
 
-// 递归遍历
-void DFSTraverse(Graph graph, int *visit_arr,int index)
-{
+// DFS递归遍历
+void DFSTraverse(Graph graph, int visit_arr[], int index) {
     visit_arr[index] = TRUE;
-    printf("%d -> ",graph->vertices[index].data);
-    ENode edge=graph->vertices[index].firstEdge;
-    while (edge!=NULL)
-    {
-        if (visit_arr[edge->vertexIndex]==FALSE)
-            DFSTraverse( graph, visit_arr,edge->vertexIndex);
-        edge=edge->nextEdge;
-    } 
+    printf("%d -> ", graph->vertices[index].data);
+    ENode edge = graph->vertices[index].firstEdge;
+    while (edge != NULL) {
+        if (visit_arr[edge->vertexIndex] == FALSE)
+            DFSTraverse(graph, visit_arr, edge->vertexIndex);
+        edge = edge->nextEdge;
+    }
 }
 
 // DFS 深度优先搜索
 void DFS(Graph graph) {
-    // 判断顶点是否已被遍历
+    // 判断顶点是否已被遍历的辅助数组
     int visit_arr[graph->vertex_num];
-    memset(visit_arr, 0, sizeof(visit_arr));
+    memset(visit_arr, FALSE, sizeof(visit_arr));
     printf("\n--- DFS ---\n");
-    for (int i = 0; i < graph->vertex_num; i++)
-    {
-        if(visit_arr[i]==FALSE)
-            DFSTraverse(graph,&visit_arr,i);
+    for (int i = 0; i < graph->vertex_num; i++) {
+        if (visit_arr[i] == FALSE)
+            DFSTraverse(graph, visit_arr, i);
     }
     printf("\n--- DONE ---\n");
 }
 
+// BFS遍历
+void BFSTraverse(Graph graph, int visit_arr[], int first) {
+    Queue queue = initQueue();
+    visit_arr[first] = TRUE;
+    // 顶点入队
+    enQueue(queue, first);
+    printf("%d -> ", graph->vertices[first].data);
+    while (!isEmpty(queue)) {
+        // 顶点出队，获取其邻接顶点
+        int index = deQueue(queue);
+        ENode temp = graph->vertices[index].firstEdge;
+        // 打印未遍历的邻接顶点并入队
+        while (temp) {
+            if (visit_arr[temp->vertexIndex] != TRUE) {
+                printf("%d -> ", graph->vertices[temp->vertexIndex].data);
+                visit_arr[temp->vertexIndex] = TRUE;
+                enQueue(queue, temp->vertexIndex);
+            }
+            temp = temp->nextEdge;
+        }
+    }
+}
+
 // BFS 广度优先搜索
 void BFS(Graph graph) {
-
+    // 判断顶点是否已被遍历的辅助数组
+    int visit_arr[graph->vertex_num];
+    memset(visit_arr, FALSE, sizeof(visit_arr));
+    printf("\n--- BFS ---\n");
+    for (int i = 0; i < graph->vertex_num; i++) {
+        if (visit_arr[i] == FALSE)
+            BFSTraverse(graph, visit_arr, i);
+    }
+    printf("\n--- DONE ---\n");
 }
 
 // 打印图

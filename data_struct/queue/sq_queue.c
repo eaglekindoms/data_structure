@@ -49,7 +49,7 @@ T deQueue(Queue queue)
         exit(ERROR_NULL_PTR);
     T data = *(queue->font++);
     queue->length--;
-    printf("DeQueue data: %d \n", data);
+//    printf("DeQueue data: %d \n", data);
     return data;
 }
 

@@ -3,27 +3,24 @@
 //
 
 #include "graph.h"
-#include "memory.h"
-#include "../queue/queue.h"
 
 #define GRAPH_INIT_SIZE 10
 #define GRAPH_INCREMENT 10
 
-typedef int W;    // 边权值
-
-// 边节点
-typedef struct EdgeNode {
-    int vertexIndex; // 顶点下标
-    struct EdgeNode *nextEdge; // 指向下一个邻接点的指针
-    W weight; // 权重
-} *ENode;
-
 // 顶点节点
 typedef struct VertexNode {
     T data; // 顶点的数据域
-    ENode firstEdge; // 指向邻接点的指针
+    ENode *firstEdge; // 指向邻接点的指针
 } VNode;
 
+// 边节点定义
+struct EdgeNode {
+    int vertexIndex; // 顶点下标
+    struct EdgeNode *nextEdge; // 指向下一个邻接点的指针
+    W weight; // 权重
+};
+
+// 图定义
 struct Graph_T {
     VNode *vertices; // 图中顶点的数组
     int vertex_num; // 记录图中顶点数
@@ -81,8 +78,9 @@ int getVertex(Graph graph, T data) {
 }
 
 // 判断边是否存在
-int isExistedEdge(VNode *vertex, int toIndex) {
-    ENode edge = vertex->firstEdge;
+int isExistedEdge(Graph graph, int fromIndex, int toIndex) {
+    VNode *fromVertex = &graph->vertices[fromIndex];
+    ENode *edge = fromVertex->firstEdge;
     while (edge != NULL) {
         if (edge->vertexIndex == toIndex) {
             return TRUE;
@@ -93,8 +91,8 @@ int isExistedEdge(VNode *vertex, int toIndex) {
 }
 
 // 创建边节点
-ENode createENode(int vIndex, W weight) {
-    ENode edge = (ENode) malloc(sizeof(ENode));
+ENode *createENode(int vIndex, W weight) {
+    ENode *edge = (ENode *) malloc(sizeof(ENode));
     edge->vertexIndex = vIndex;
     edge->nextEdge = NULL;
     edge->weight = weight;
@@ -114,17 +112,17 @@ void addEdge(Graph graph, T from, T to) {
         toIndex = saveVertex(graph, to);
     }
     VNode *fromVertex = &graph->vertices[fromIndex];
-    if (TRUE == isExistedEdge(fromVertex, toIndex)) {
+    if (TRUE == isExistedEdge(graph, fromIndex, toIndex)) {
         printf("\n---repeat edge---\n");
         return;
     }
     // 初始化边节点
-    ENode edge = createENode(toIndex, 0);
+    ENode *edge = createENode(toIndex, 0);
     if (fromVertex->firstEdge == NULL) {
         fromVertex->firstEdge = edge;
         graph->edge_num++;
     } else {
-        ENode temp = fromVertex->firstEdge;
+        ENode *temp = fromVertex->firstEdge;
         while (temp) {
             if (temp->nextEdge == NULL)
                 break;
@@ -144,11 +142,11 @@ void removeEdge(Graph graph, T from, T to) {
         return;
     }
     VNode *fromVertex = &graph->vertices[fromIndex];
-    if (FALSE == isExistedEdge(fromVertex, toIndex)) {
+    if (FALSE == isExistedEdge(graph, fromIndex, toIndex)) {
         printf("\n--- edge dosen't exist ---\n");
         return;
     }
-    ENode temp = fromVertex->firstEdge;
+    ENode *temp = fromVertex->firstEdge;
     if (temp->vertexIndex == toIndex) {
         fromVertex->firstEdge = fromVertex->firstEdge->nextEdge;
         free(temp);
@@ -156,7 +154,7 @@ void removeEdge(Graph graph, T from, T to) {
     } else {
         while (temp) {
             if (temp->nextEdge->vertexIndex == toIndex) {
-                ENode freeNode = temp->nextEdge;
+                ENode *freeNode = temp->nextEdge;
                 temp->nextEdge = temp->nextEdge->nextEdge;
                 free(freeNode);
                 graph->edge_num--;
@@ -171,7 +169,7 @@ void removeEdge(Graph graph, T from, T to) {
 void DFSTraverse(Graph graph, int visit_arr[], int index) {
     visit_arr[index] = TRUE;
     printf("%d -> ", graph->vertices[index].data);
-    ENode edge = graph->vertices[index].firstEdge;
+    ENode *edge = graph->vertices[index].firstEdge;
     while (edge != NULL) {
         if (visit_arr[edge->vertexIndex] == FALSE)
             DFSTraverse(graph, visit_arr, edge->vertexIndex);
@@ -202,7 +200,7 @@ void BFSTraverse(Graph graph, int visit_arr[], int first) {
     while (!isEmpty(queue)) {
         // 顶点出队，获取其邻接顶点
         int index = deQueue(queue);
-        ENode temp = graph->vertices[index].firstEdge;
+        ENode *temp = graph->vertices[index].firstEdge;
         // 打印未遍历的邻接顶点并入队
         while (temp) {
             if (visit_arr[temp->vertexIndex] != TRUE) {
@@ -233,7 +231,7 @@ void printGraph(Graph graph) {
     printf("\n--- PRINT GRAPH ---\n");
     for (int i = 0; i < graph->vertex_num; ++i) {
         printf("vertex: %d ", graph->vertices[i].data);
-        ENode edge = graph->vertices[i].firstEdge;
+        ENode *edge = graph->vertices[i].firstEdge;
         while (edge) {
             printf(" -> %d", graph->vertices[edge->vertexIndex].data);
             edge = edge->nextEdge;

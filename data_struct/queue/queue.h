@@ -13,6 +13,9 @@ typedef int T;
 
 typedef struct Queue_T *Queue;
 
+// 初始化指定大小的队列
+Queue initQueueWithSize(int size);
+
 // 初始化队列
 Queue initQueue();
 

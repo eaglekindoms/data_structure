@@ -14,21 +14,21 @@ typedef int W;    // 边权值
 // 边节点
 typedef struct EdgeNode {
     int vertexIndex; // 顶点下标
-    struct EdgeNode *nextEdge;// 指向下一个邻接点的指针
-    W weight;// 权重
+    struct EdgeNode *nextEdge; // 指向下一个邻接点的指针
+    W weight; // 权重
 } *ENode;
 
 // 顶点节点
 typedef struct VertexNode {
-    T data;// 顶点的数据域
-    ENode firstEdge;// 指向邻接点的指针
+    T data; // 顶点的数据域
+    ENode firstEdge; // 指向邻接点的指针
 } VNode;
 
 struct Graph_T {
-    VNode *vertices;// 图中顶点的数组
-    int vertex_num;// 记录图中顶点数
-    int edge_num;// 记录图中边数
-    int capacity;// 容量
+    VNode *vertices; // 图中顶点的数组
+    int vertex_num; // 记录图中顶点数
+    int edge_num; // 记录图中边数
+    int capacity; // 容量
 };
 
 // 初始化图
@@ -194,7 +194,7 @@ void DFS(Graph graph) {
 
 // BFS遍历
 void BFSTraverse(Graph graph, int visit_arr[], int first) {
-    Queue queue = initQueue();
+    Queue queue = initQueueWithSize(graph->vertex_num);
     visit_arr[first] = TRUE;
     // 顶点入队
     enQueue(queue, first);

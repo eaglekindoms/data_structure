@@ -16,17 +16,22 @@ struct Queue_T {
     int capacity;
 };
 
-// 初始化队列
-Queue initQueue() {
+// 初始化指定大小的队列
+Queue initQueueWithSize(int size) {
     Queue queue = (Queue) malloc(sizeof(Queue));
-    queue->rawData = (T *) malloc(QUEUE_INIT_SIZE * sizeof(T));
-    memset(queue->rawData, 0, QUEUE_INIT_SIZE * sizeof(T));
+    queue->rawData = (T *) malloc(size * sizeof(T));
+    memset(queue->rawData, 0, size * sizeof(T));
     if (!queue->rawData)
         exit(ERROR_MALLOC_FAILED);
     queue->tail = queue->font = 0;
     queue->length = 0;
-    queue->capacity = QUEUE_INIT_SIZE;
+    queue->capacity = size;
     return queue;
+}
+
+// 初始化队列
+Queue initQueue() {
+    return initQueueWithSize(QUEUE_INIT_SIZE);
 }
 
 // 队尾插入元素

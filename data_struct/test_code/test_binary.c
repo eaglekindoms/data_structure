@@ -21,35 +21,24 @@
       │             6                       │
       └─────────────────────────────────────┘
 */
-int main()
-{
+int main() {
     Tree tree = initTree();
-    putElem(tree, 20);
-    putElem(tree, 9);
-    putElem(tree, 27);
-    putElem(tree, 2);
-    putElem(tree, 12);
-    putElem(tree, 13);
-    putElem(tree, 1);
-    putElem(tree, 4);
-    putElem(tree, 3);
-    putElem(tree, 5);
-    putElem(tree, 7);
-    putElem(tree, 6);
-    putElem(tree, 38);
-    putElem(tree, 30);
-    putElem(tree, 29);
-    putElem(tree, 31);
-    putElem(tree, 22);
+    int data[] = {20, 9, 27, 2, 12, 13, 1, 4, 3, 5, 7, 6, 38, 30, 29, 31, 22};
+    int len = sizeof(data) / sizeof(data[0]);
+    for (int i = 0; i < len; ++i) {
+        putElem(tree, data[i]);
+    }
     printf("\nCurrent Root: %d\n", getRoot(tree));
     printf("\nCurrent Height: %d\n", getHeight(tree));
     printf("\nCurrent Length: %d\n", getLength(tree));
+    inOrder(tree);
     removeElem(tree, 20);
-    printf("\nCurrent Root: %d\n",getRoot(tree));
-    printf("\nCurrent Height: %d\n", getHeight(tree));
+//    printf("\nCurrent Root: %d\n", getRoot(tree));
+//    printf("\nCurrent Height: %d\n", getHeight(tree));
+    removeElem(tree, 38);
     removeElem(tree, 6);
-    printf("\nCurrent Height: %d\n", getHeight(tree));
-    printf("\nCurrent Length: %d\n", getLength(tree));
+//    printf("\nCurrent Height: %d\n", getHeight(tree));
+//    printf("\nCurrent Length: %d\n", getLength(tree));
     preOrder(tree);
     inOrder(tree);
     postOrder(tree);

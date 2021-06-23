@@ -100,7 +100,7 @@ ENode *createENode(int vIndex, W weight) {
 }
 
 // 添加边
-void addEdge(Graph graph, T from, T to) {
+void addEdge(Graph graph, T from, T to, W weight) {
     int fromIndex = getVertex(graph, from);
     // 顶点不存在时，储存顶点
     if (fromIndex == -1) {
@@ -117,7 +117,7 @@ void addEdge(Graph graph, T from, T to) {
         return;
     }
     // 初始化边节点
-    ENode *edge = createENode(toIndex, 0);
+    ENode *edge = createENode(toIndex, weight);
     if (fromVertex->firstEdge == NULL) {
         fromVertex->firstEdge = edge;
         graph->edge_num++;

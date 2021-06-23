@@ -34,7 +34,7 @@ int getVertex(Graph graph, T data);
 int isExistedEdge(Graph graph, int fromIndex, int toIndex);
 
 // 添加边
-void addEdge(Graph graph, T from, T to);
+void addEdge(Graph graph, T from, T to,W weight);
 
 // 移除边
 void removeEdge(Graph graph, T from, T to);

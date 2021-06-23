@@ -6,7 +6,6 @@
 
 typedef struct BNode {
     T data;
-//    struct BNode *parent;
     struct BNode *left;
     struct BNode *right;
 } Node;
@@ -49,33 +48,10 @@ Node *findNode(Tree tree, T data) {
     return NULL;
 }
 
-// 返回父节点
-Node *findParent(Tree tree, T data) {
-    if (tree->root == NULL) {
-        exit(ERROR_NULL_PTR);
-    }
-    Node *curr = tree->root;
-    while (curr != NULL) {
-        if (data > curr->data) {
-            if (curr->right->data == data)
-                return curr;
-            curr = curr->right;
-        } else if (data < curr->data) {
-            if (curr->left->data == data)
-                return curr;
-            curr = curr->left;
-        } else {
-            return curr;
-        }
-    }
-    return NULL;
-}
-
 // 插入元素
 void putElem(Tree tree, T data) {
     Node *node = (Node *) malloc(sizeof(Node));
     node->data = data;
-//    node->parent = NULL;
     node->left = NULL;
     node->right = NULL;
     if (tree->root == NULL) {
@@ -85,12 +61,10 @@ void putElem(Tree tree, T data) {
     } else {
         Node *parent = findNode(tree, data);
         if (data < parent->data) {
-//            node->parent = parent;
             parent->left = node;
             tree->length++;
             return;
         } else if (data > parent->data) {
-//            node->parent = parent;
             parent->right = node;
             tree->length++;
             return;
@@ -98,43 +72,23 @@ void putElem(Tree tree, T data) {
     }
 }
 
-void removeElemNode(Tree tree, Node *node, T data) {
+Node *removeElemNode(Node *node, T data) {
     if (node == NULL) {
-        return;
+        return NULL;
     }
-
     if (node->data == data) {
         if (node->left == NULL) {
             Node *temp = node;
             node = temp->right;
-            Node *parent = findParent(tree, temp->data);
-
-            if (parent != temp) {
-                if (parent->left->data == temp->data) {
-                    parent->left = node;
-                } else {
-                    parent->right = node;
-                }
-            }
-
             free(temp);
-            return;
+            return node;
         } else if (node->right == NULL) {
             Node *temp = node;
             node = temp->left;
-            Node *parent = findParent(tree, temp->data);
-
-            if (parent != temp) {
-                if (parent->left->data == temp->data) {
-                    parent->left = node;
-                } else {
-                    parent->right = node;
-                }
-            }
             free(temp);
-            return;
+            return node;
         } else {
-            // 只有子树非空，获取右子树的最小值
+            // 左右子树非空，获取右子树的最小值
             // 替换待删除节点的值，
             // 然后删除该右子树的最小值(最小值的左子树必为空)
             // 运用递归的思路
@@ -143,13 +97,16 @@ void removeElemNode(Tree tree, Node *node, T data) {
                 temp = temp->left;
             }
             node->data = temp->data;
-            removeElemNode(tree, node->right, temp->data);
+            // 这样删除子节点时不用考虑原父节点的左右子节点指针指向问题,
+            // 直接返回子节点本身就可以修改对应父节点左右子节点指针指向
+            node->right = removeElemNode(node->right, temp->data);
         }
     } else if (node->data > data) {
-        removeElemNode(tree, node->left, data);
+        node->left = removeElemNode(node->left, data);
     } else if (node->data < data) {
-        removeElemNode(tree, node->right, data);
+        node->right = removeElemNode(node->right, data);
     }
+    return node;
 }
 
 // 移除元素
@@ -159,7 +116,7 @@ void removeElem(Tree tree, T data) {
         printf("\n---don't find element---\n");
         return;
     }
-    removeElemNode(tree, node, data);
+    removeElemNode(tree->root, data);
     tree->length--;
 }
 

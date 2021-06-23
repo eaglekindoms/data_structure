@@ -1,4 +1,4 @@
-add_compile_options(-fexec-charset=GBK)
+#add_compile_options(-fexec-charset=GBK)
 
 #-------栈--------
 #顺序栈测试
@@ -54,6 +54,8 @@ target_sources(test_linear_list_sq PUBLIC list/sequence_list.c)
 add_executable(test_binary_tree_link test_code/test_binary.c)
 target_sources(test_binary_tree_link PUBLIC tree/link_binary_tree.c)
 
+# 二叉堆
+add_executable(test_binary_heap test_code/test_heap.c)
 #-------二叉树--------
 
 #-------图--------

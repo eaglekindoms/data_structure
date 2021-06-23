@@ -28,19 +28,13 @@ int main() {
  */
 int testGraph() {
     Graph graph = initGraph();
-    addEdge(graph, 1, 2);
-    addEdge(graph, 1, 4);
-    addEdge(graph, 2, 5);
-    addEdge(graph, 3, 2);
-    addEdge(graph, 3, 6);
-    addEdge(graph, 4, 5);
-    addEdge(graph, 4, 7);
-    addEdge(graph, 5, 8);
-    addEdge(graph, 5, 6);
-    addEdge(graph, 6, 9);
-    addEdge(graph, 7, 10);
-    addEdge(graph, 8, 9);
-    addEdge(graph, 10, 9);
+    int arr[13][3] = {1, 2, 12, 1, 4, 14, 2, 5, 25,
+                      3, 2, 32, 3, 6, 36, 4, 5, 45,
+                      4, 7, 47, 5, 8, 58, 5, 6, 56,
+                      6, 9, 69, 7, 10, 70, 8, 9, 89, 10, 9, 19};
+    for (int i = 0; i < 13; ++i) {
+        addEdge(graph, arr[i][0], arr[i][1], arr[i][2]);
+    }
     printGraph(graph);
     DFS(graph);
     BFS(graph);

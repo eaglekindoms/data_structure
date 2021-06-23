@@ -82,7 +82,7 @@ int isExistedEdge(Graph graph, int fromIndex, int toIndex) {
 }
 
 // 添加边
-void addEdge(Graph graph, T from, T to) {
+void addEdge(Graph graph, T from, T to, W weight) {
     int fromIndex = getVertex(graph, from);
     // 顶点不存在时，储存顶点
     if (fromIndex == -1) {
@@ -97,6 +97,7 @@ void addEdge(Graph graph, T from, T to) {
         printf("\n---repeat edge---\n");
     } else {
         graph->edges[fromIndex][toIndex].adj = TRUE;
+        graph->edges[fromIndex][toIndex].weight = weight;
     }
 }
 

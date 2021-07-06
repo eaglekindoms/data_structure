@@ -13,31 +13,31 @@ typedef int T;
 
 typedef struct Queue_T *Queue;
 
-// 初始化指定大小的队列
-Queue initQueueWithSize(int size);
+extern struct __QUEUE_API__
+{
+    // 初始化队列
+    Queue (*init)();
 
-// 初始化队列
-Queue initQueue();
+    // 队尾插入元素
+    void (*insert)(Queue queue, T data);
 
-// 队尾插入元素
-void enQueue(Queue queue, T data);
+    // 队头移除元素
+    T (*remove)(Queue queue);
 
-// 队头移除元素
-T deQueue(Queue queue);
+    //获取队头元素
+    T (*front)(Queue queue);
 
-//获取队头元素
-T peekFont(Queue queue);
+    // 清空队列
+    void (*clear)(Queue queue);
 
-// 清空队列
-void clearQueue(Queue queue);
+    //队列判空
+    int (*isEmpty)(Queue queue);
 
-//队列判空
-int isEmpty(Queue queue);
+    //获取队列长度
+    int (*getLength)(Queue queue);
 
-//获取队列长度
-int getLength(Queue queue);
-
-// 遍历打印队列
-void printQueue(Queue queue);
+    // 遍历打印队列
+    void (*print)(Queue queue);
+} MyQueue;
 
 #endif //DATA_STRUCTURE_QUEUE_H

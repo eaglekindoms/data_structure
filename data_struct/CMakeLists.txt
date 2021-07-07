@@ -33,8 +33,8 @@ add_executable(linear_list_link_single test_code/test_linear_list.c)
 target_sources(linear_list_link_single PUBLIC list/singly_linked_list.c)
 
 # 循环单链表
-add_executable(circular_linked_list test_code/test_linear_list.c)
-target_sources(circular_linked_list PUBLIC list/circular_linked_list.c)
+add_executable(linear_list_link_circular test_code/test_linear_list.c)
+target_sources(linear_list_link_circular PUBLIC list/circular_linked_list.c)
 
 # 静态单链表
 add_executable(linear_list_link_static test_code/test_linear_list.c)
@@ -54,8 +54,15 @@ target_sources(test_linear_list_sq PUBLIC list/sequence_list.c)
 add_executable(test_binary_tree_link test_code/test_binary.c)
 target_sources(test_binary_tree_link PUBLIC tree/link_binary_tree.c)
 
+# 线索二叉树
+add_executable(test_binary_tree_threaded test_code/test_binary.c)
+target_sources(test_binary_tree_threaded PUBLIC tree/threaded_binary_tree.c)
+
 # 二叉堆
 add_executable(test_binary_heap test_code/test_heap.c)
+
+# 哈夫曼树
+add_executable(test_binary_tree_huffman tree/huffman_tree.c)
 #-------二叉树--------
 
 #-------图--------

@@ -94,12 +94,13 @@ void printQueue(Queue queue) {
 
 // API
 struct __QUEUE_API__ MyQueue = {
-    .init = initQueue,
-    .insert = enQueue,
-    .remove = deQueue,
-    .front = peekFont,
-    .clear = clearQueue,
-    .isEmpty = isEmpty,
-    .getLength = getLength,
-    .print = printQueue,
+        .initWithSize=initQueueWithSize,
+        .init = initQueue,
+        .insert = enQueue,
+        .remove = deQueue,
+        .front = peekFont,
+        .clear = clearQueue,
+        .isEmpty = isEmpty,
+        .getLength = getLength,
+        .print = printQueue,
 };

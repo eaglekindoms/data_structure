@@ -192,21 +192,21 @@ void DFS(Graph graph) {
 
 // BFS遍历
 void BFSTraverse(Graph graph, int visit_arr[], int first) {
-    Queue queue = initQueueWithSize(graph->vertex_num);
+    Queue queue = MyQueue.initWithSize(graph->vertex_num);
     visit_arr[first] = TRUE;
     // 顶点入队
-    enQueue(queue, first);
+    MyQueue.insert(queue, first);
     printf("%d -> ", graph->vertices[first].data);
-    while (!isEmpty(queue)) {
+    while (!MyQueue.isEmpty(queue)) {
         // 顶点出队，获取其邻接顶点
-        int index = deQueue(queue);
+        int index = MyQueue.remove(queue);
         ENode *temp = graph->vertices[index].firstEdge;
         // 打印未遍历的邻接顶点并入队
         while (temp) {
             if (visit_arr[temp->vertexIndex] != TRUE) {
                 printf("%d -> ", graph->vertices[temp->vertexIndex].data);
                 visit_arr[temp->vertexIndex] = TRUE;
-                enQueue(queue, temp->vertexIndex);
+                MyQueue.insert(queue, temp->vertexIndex);
             }
             temp = temp->nextEdge;
         }

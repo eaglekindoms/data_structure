@@ -1,3 +1,4 @@
+add_executable(integral_mc integral_mc.cpp)
 #----- 排序 -----
 add_executable(test_sort_bubble sort/test_sort.c)
 target_sources(test_sort_bubble PUBLIC sort/bubble_sort.c)

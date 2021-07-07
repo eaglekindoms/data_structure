@@ -49,7 +49,7 @@ T deQueue(Queue queue)
         exit(ERROR_NULL_PTR);
     T data = *(queue->font++);
     queue->length--;
-//    printf("DeQueue data: %d \n", data);
+    //    printf("DeQueue data: %d \n", data);
     return data;
 }
 
@@ -97,3 +97,15 @@ void printQueue(Queue queue)
     }
     printf("\n--- Print Done ---\n");
 }
+
+// API
+struct __QUEUE_API__ MyQueue = {
+    .init = initQueue,
+    .insert = enQueue,
+    .remove = deQueue,
+    .front = peekFont,
+    .clear = clearQueue,
+    .isEmpty = isEmpty,
+    .getLength = getLength,
+    .print = printQueue,
+};

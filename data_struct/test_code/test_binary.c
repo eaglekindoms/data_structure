@@ -40,7 +40,7 @@ int main() {
 //    printf("\nCurrent Height: %d\n", getHeight(tree));
 //    printf("\nCurrent Length: %d\n", getLength(tree));
     preOrder(tree);
-    inOrder(tree);
+//    inOrder(tree);
     postOrder(tree);
     levelOrder(tree);
     return 0;

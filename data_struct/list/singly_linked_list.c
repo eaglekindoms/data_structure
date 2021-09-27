@@ -152,15 +152,30 @@ void printList(List list) {
     printf("\n---print done---\n");
 }
 
+// 链表逆置
+void reverseList(List list) {
+    Node *newNode = NULL;
+    Node *curr = list->head->next;
+    while (curr != NULL) {
+        Node *temp = curr;
+        curr = curr->next;
+        temp->next = newNode;
+        newNode = temp;
+    }
+    list->head->next = newNode;
+}
+
 //独有方法
 void uniqueFun(List list) {
+    reverseList(list);
+    printList(list);
     // 单链表反转
     printf("\n---reverse list ---\n");
-    Node *tail = getPriorNode(list, list->length - 1)->next;
-    for (int i = list->length - 1; i > 0; i--) {
-        Node *prior = getPriorNode(list, i);
-        prior->next->next = prior;
-        // printf("%d ",prior->next->data); 
-    }
-    list->head->next = tail;
+//    Node *tail = getPriorNode(list, list->length - 1)->next;
+//    for (int i = list->length - 1; i > 0; i--) {
+//        Node *prior = getPriorNode(list, i);
+//        prior->next->next = prior;
+//        // printf("%d ",prior->next->data);
+//    }
+//    list->head->next = tail;
 }

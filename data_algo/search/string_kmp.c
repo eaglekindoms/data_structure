@@ -6,10 +6,7 @@
 #include "stdlib.h"
 #include <sys/time.h>
 
-// 构建next数组
-int next[100] = {0};
-
-void build_next(char *pattern);
+int *build_next(char *pattern);
 
 // 匹配子串
 void kmp(char *str, char *pattern);
@@ -37,10 +34,14 @@ int main() {
     return 0;
 }
 
-void build_next(char *pattern) {
+int *build_next(char *pattern) {
     int now = 0;
     int i = 1;
     int len = strlen(pattern);
+    // 构建next数组
+//    static int next[100] = {0};
+    int *const next = (int *) malloc(len * sizeof(int));
+    memset(next, 0, len * sizeof(int));
     while (i < len) {
         if (pattern[i] == pattern[now]) {
             now++;
@@ -53,12 +54,13 @@ void build_next(char *pattern) {
             next[i] = now;
         }
     }
+    return next;
 }
 
 void kmp(char *str, char *pattern) {
     int tar = 0;
     int pos = 0;
-    build_next(pattern);
+    int *next = build_next(pattern);
     while (tar < strlen(str)) {
         if (str[tar] == pattern[pos]) {
             tar++;

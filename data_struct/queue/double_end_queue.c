@@ -11,7 +11,11 @@
 
 typedef int T;
 typedef struct Queue_T *Queue;
-
+/**
+ * 合法出栈序列：卡特兰数：(1/n+1)C(n,2n)
+ * 栈中合法的序列，在双端队列中必合法
+ *
+ */
 struct Queue_T {
     int font;
     int tail;

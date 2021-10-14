@@ -1,0 +1,1 @@
+add_executable(week01_sort_algo week01_sort_algo.c)

@@ -23,7 +23,7 @@ AVLNode *init_node(T data) {
 }
 
 int get_height(AVLNode *node) {
-    if (node == NULL) return 0;
+    if (node == NULL) return -1;
     return node->height;
 }
 
@@ -197,9 +197,11 @@ int main() {
     for (int i = 0; i < sizeof(data) / sizeof(int); ++i) {
         insert(&tree, data[i]);
     }
-    removeT(&tree,9);
-    removeT(&tree,12);
-    removeT(&tree,13);
+    for (int i = 0; i < 6; ++i) {
+        removeT(&tree,data[i]);
+    }
     printf("%d\n", tree->data);
-    printf("%d", tree->height);
+    printf("%d\n", tree->height);
+    printf("%d\n", get_height(tree));
+    printf("%d", get_balance(tree));
 }

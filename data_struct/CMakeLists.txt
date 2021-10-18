@@ -63,6 +63,9 @@ add_executable(test_binary_heap test_code/test_heap.c)
 
 # 哈夫曼树
 add_executable(test_binary_tree_huffman tree/huffman_tree.c)
+
+# 平衡二叉树
+add_executable(avl_tree tree/avl_tree.c)
 #-------二叉树--------
 
 #-------图--------

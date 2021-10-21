@@ -188,9 +188,10 @@ void insert(AVLTree *tree, T data) {
     *tree = insert_node(*tree, data);
 }
 
-void removeT(AVLTree *tree,T data){
-    *tree= remove_node(*tree,data);
+void removeT(AVLTree *tree, T data) {
+    *tree = remove_node(*tree, data);
 }
+
 int main() {
     AVLTree tree = NULL;
     int data[] = {20, 9, 27, 2, 12, 13, 1, 4, 3, 5, 7, 6, 38, 30, 29, 31, 22};
@@ -198,10 +199,10 @@ int main() {
         insert(&tree, data[i]);
     }
     for (int i = 0; i < 6; ++i) {
-        removeT(&tree,data[i]);
+        removeT(&tree, data[i]);
     }
     printf("%d\n", tree->data);
     printf("%d\n", tree->height);
     printf("%d\n", get_height(tree));
-    printf("%d", get_balance(tree));
+    printf("%d\n", get_balance(tree));
 }

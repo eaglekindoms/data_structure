@@ -32,21 +32,18 @@ void heap_sort(int *arr, int len);
 int main() {
     int arr[] = {2, 3, 8, 5, 6, 1, 0, 1, -12, -9, 5};
     int len = sizeof(arr) / sizeof(int);
-    int *arr1, *arr2, *arr3, *arr4, *arr5, *arr6;
-    copy_arr(arr, &arr1, len);
-    copy_arr(arr, &arr2, len);
-    copy_arr(arr, &arr3, len);
-    copy_arr(arr, &arr4, len);
-    copy_arr(arr, &arr5, len);
-    copy_arr(arr, &arr6, len);
+    int *array[7];
+    for (int i = 0; i < 7; ++i) {
+        copy_arr(arr, &array[i], len);
+    }
     // 六种排序算法
-    bubble_sort(arr, len);
-    selection_sort(arr1, len);
-    insertion_sort(arr2, len);
-    shell_sort(arr3, len);
-    merge_sort(arr4, len);
-    quick_sort(arr5, len);
-    heap_sort(arr6, len);
+    bubble_sort(array[0], len);
+    selection_sort(array[1], len);
+    insertion_sort(array[2], len);
+    shell_sort(array[3], len);
+    merge_sort(array[4], len);
+    quick_sort(array[5], len);
+    heap_sort(array[6], len);
 }
 
 /*

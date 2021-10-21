@@ -6,8 +6,8 @@
 
 int main() {
     Heap heap = initHeap();
-    int arr[] = {1, 2, 3, 4, 5, 7, 9, 12, 13, 22};
-    for (int i = 0; i < 10; ++i) {
+    int arr[] = {20, 9, 27, 2, 12, 22, 38, 1, 4, 0, 13, 00, 30, 0, 0, 0, 3, 5, 0, 0, 0, 0, 29, 31, 0, 0};
+    for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i) {
         insert(heap, arr[i]);
     }
     printHeap(heap);

@@ -1,7 +1,6 @@
 #include "../queue/queue.h"
 
-int main()
-{
+int main() {
     Queue queue = MyQueue.init();
     printf("\n --- EN QUEUE --- \n");
     MyQueue.insert(queue, 2);

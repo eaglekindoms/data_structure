@@ -4,11 +4,12 @@
 
 #include "stdio.h"
 #include "stdlib.h"
+#include "math.h"
 #include "memory.h"
 #include "error_code.h"
 #include "boolean.h"
 
-#define DEFAULT_HEAP_SIZE 20
+#define DEFAULT_HEAP_SIZE 50
 
 typedef int T;
 
@@ -82,9 +83,24 @@ void buildHeap(Heap heap, T a[], int size) {
     }
 }
 
+char *space(int len) {
+    char *new_space = (char *) malloc(4 * len * sizeof(char));
+    memset(new_space, ' ', 4 * len * sizeof(char));
+    return new_space;
+}
+
+int mod_(int i) {
+    if (i % 2 >= 2) return mod_(i % 2);
+    return i % 2;
+}
+
 //打印堆
 void printHeap(Heap heap) {
+//    int height = (int) log2(heap->length);
     for (int i = 0; i < heap->length; ++i) {
+//        char *spac = space(height-(int) log2(i+1));
+//        if (mod_(i+1)>0)printf(" \n");
         printf("%d ", heap->arr[i]);
     }
 }
+// 20,9,27,2,12,22,38,1,4,0,13,00,30,0,0,0,3,5,0,0,0,0,29,31,0,0

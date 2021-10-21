@@ -47,13 +47,13 @@ int testGraph() {
 
 void testArray() {
     int size = 10;
-    int arr1[size];
+    int arr1[10];
     memset(arr1, 0, sizeof(arr1));
     for (int i = 0; i < size; ++i) {
         printf("%d ", *(arr1 + 1));
     }
     printf("\n");
-    int arr2[size];
+    int arr2[10];
     memset(arr1, 0, size * sizeof(int));
     for (int i = 0; i < size; ++i) {
         printf("%d ", *(arr2 + 1));

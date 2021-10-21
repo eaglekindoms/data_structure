@@ -5,5 +5,6 @@
 #ifndef DATA_STRUCTURE_SORT_H
 #define DATA_STRUCTURE_SORT_H
 
-void sort(int arr[],int len);
+void sort(int arr[], int len);
+
 #endif //DATA_STRUCTURE_SORT_H

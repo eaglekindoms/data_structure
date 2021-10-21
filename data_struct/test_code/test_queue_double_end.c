@@ -4,8 +4,8 @@
 
 #include "../queue/double_end_queue.c"
 
-int main(){
-    Queue queue=initQueue();
+int main() {
+    Queue queue = initQueue();
     printf("\n --- EN QUEUE --- \n");
     enQueueR(queue, 2);
     enQueueR(queue, 4);

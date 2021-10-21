@@ -20,10 +20,10 @@ void swap(int *a, int *b) {
 /*
  * 拷贝数组内容
  */
-void copy_arr(const int *a, int **b, int len) {
-    *b = (int *) malloc(len * sizeof(int));
+void copy_arr(const int *src, int **dst, int len) {
+    *dst = (int *) malloc(len * sizeof(int));
     for (int i = 0; i < len; ++i) {
-        *(*b + i) = *(a + i);
+        *(*dst + i) = *(src + i);
     }
 }
 

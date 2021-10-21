@@ -13,10 +13,10 @@ typedef int T;
 
 typedef struct Queue_T *Queue;
 
-extern struct __QUEUE_API__
-{
+extern struct __QUEUE_API__ {
     // 初始化指定大小的队列
     Queue (*initWithSize)(int size);
+
     // 初始化队列
     Queue (*init)();
 

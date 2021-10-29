@@ -3,7 +3,7 @@
 // 快速排序
 //
 #include "sort.h"
-#include "utils.h"
+#include "../utils.h"
 
 void quickSort(int arr[], int low, int high);
 

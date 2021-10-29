@@ -4,7 +4,7 @@
 //
 #include "stdlib.h"
 #include "sort.h"
-#include "utils.h"
+#include "../utils.h"
 
 void sort_no_rec(int arr[], int len) {
     int *a = arr;

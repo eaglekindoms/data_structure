@@ -4,7 +4,7 @@
 //
 
 #include "sort.h"
-#include "utils.h"
+#include "../utils.h"
 
 void sort(int arr[], int len) {
     for (int i = 0; i < len - 1; ++i) {

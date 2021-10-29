@@ -88,11 +88,11 @@ AVLNode *balance_node(AVLNode *node) {
     //判断节点是否平衡
     int balance = get_balance(node);
 
-    //left left
+    //left-left
     if (balance > 1 && get_balance(node->left) >= 0)
         return right_rotate(node);
 
-    // Right Right
+    // Right-Right
     if (balance < -1 && get_balance(node->right) <= 0)
         return left_rotate(node);
 

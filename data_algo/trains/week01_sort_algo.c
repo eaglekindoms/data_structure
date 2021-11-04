@@ -31,6 +31,7 @@ void bucket_sort(int *arr, int len);
 
 // 基数排序
 void radix_sort(int *arr, int len);
+void radix_sort2(int *arr, int len);
 
 typedef void (*sort)(int *, int);
 
@@ -40,7 +41,7 @@ int main() {
     int *array[10];
     sort func[] = {bubble_sort, selection_sort, insertion_sort,
                    shell_sort, merge_sort, quick_sort,
-                   heap_sort, bucket_sort, radix_sort};
+                   heap_sort, bucket_sort, radix_sort,radix_sort2};
     int func_num = sizeof(func) / sizeof(func[0]);
     for (int i = 0; i < func_num; ++i) {
         copy_arr(arr, &array[i], len);

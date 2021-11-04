@@ -43,5 +43,6 @@ int main() {
 //    inOrder(tree);
     postOrder(tree);
     levelOrder(tree);
+    printTree(tree);
     return 0;
 }

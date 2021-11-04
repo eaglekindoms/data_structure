@@ -1,7 +1,9 @@
-//
-// Created by eagle on 2021/6/15.
-//
-
+/*
+ * Created by eagle on 2021/6/15.
+ * 最小生成树：prim算法、kruskal算法 （普里姆，克鲁斯卡尔）
+ * 最短路径：dijkstra算法、floyd算法（迪杰斯特拉，弗洛伊德）
+ *
+ */
 #ifndef DATA_STRUCTURE_GRAPH_H
 #define DATA_STRUCTURE_GRAPH_H
 
@@ -47,5 +49,5 @@ void BFS(Graph graph);
 
 // 打印图
 void printGraph(Graph graph);
-
+void floyd_path(Graph graph);
 #endif //DATA_STRUCTURE_GRAPH_H

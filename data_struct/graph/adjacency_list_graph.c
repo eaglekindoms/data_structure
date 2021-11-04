@@ -77,7 +77,7 @@ int getVertex(Graph graph, T data) {
     return index;
 }
 
-// 判断边是否存在
+// 判断边是否存在,返回边权重
 int isExistedEdge(Graph graph, int fromIndex, int toIndex) {
     VNode *fromVertex = &graph->vertices[fromIndex];
     ENode *edge = fromVertex->firstEdge;
@@ -180,7 +180,7 @@ void DFSTraverse(Graph graph, int visit_arr[], int index) {
 // DFS 深度优先搜索
 void DFS(Graph graph) {
     // 判断顶点是否已被遍历的辅助数组
-    int visit_arr[graph->vertex_num];
+    int *visit_arr = (int *) malloc(graph->vertex_num * sizeof(int));
     memset(visit_arr, FALSE, sizeof(visit_arr));
     printf("\n--- DFS ---\n");
     for (int i = 0; i < graph->vertex_num; i++) {
@@ -216,7 +216,8 @@ void BFSTraverse(Graph graph, int visit_arr[], int first) {
 // BFS 广度优先搜索
 void BFS(Graph graph) {
     // 判断顶点是否已被遍历的辅助数组
-    int visit_arr[graph->vertex_num];
+//    int visit_arr[graph->vertex_num];
+    int *visit_arr = (int *) malloc(graph->vertex_num * sizeof(int));
     memset(visit_arr, FALSE, sizeof(visit_arr));
     printf("\n--- BFS ---\n");
     for (int i = 0; i < graph->vertex_num; i++) {
@@ -239,4 +240,61 @@ void printGraph(Graph graph) {
         printf("\n");
     }
     printf("\n--- PRINT DONE ---\n");
+}
+
+/*
+ * prim算法：从某⼀个顶点开始构建⽣成树；
+ * 每次将代价最⼩的新顶点纳⼊⽣成树，
+ * 直到所有顶点都纳⼊为⽌。
+ * 时间复杂度：O(V*V)
+ * 适用：边稠密图
+ */
+void prim_mst(Graph graph) {}
+
+/*
+ * kruskal算法：每次选择⼀条权值最⼩的边，
+ * 使这条边的两头连通（原本已经连通的就不选）
+ * 直到所有结点都连通
+ * 时间复杂度:O(Elog2E)
+ * 适用：边稀疏图
+ */
+void kruskal_mst(Graph graph) {}
+
+/*
+ * 最短路径算法：dijkstra
+ * 时间复杂度:O(n^2)
+ */
+void dijkstra_path(Graph graph) {
+    // 标记顶点是否找到最短路径
+    int final[10] = {-1};
+    // 记录顶点前驱
+    int path[10] = {-1};
+    // 记录顶点最短路径长度
+    int dist[10] = {-1};
+
+}
+
+/*
+ * 最短路径求解：floyd
+ * 思想：动态规划
+ * 时间复杂度：O(V^3)
+ */
+void floyd_path(Graph graph) {
+    int vertex_num = 10;
+    int A[10][10];
+    int path[10][10];
+    for (int i = 0; i < 10; ++i) {
+        memset(path[i], -1, 10 * sizeof(int));
+    }
+    for (int i = 0; i < vertex_num; ++i) {
+        for (int j = 0; j < vertex_num; ++j) {
+            for (int k = 0; k < vertex_num; ++k) {
+
+                if (A[i][j] > A[i][k] + A[k][j]) {
+                    A[i][j] = A[i][k] + A[k][j];
+                    path[i][j] = k;
+                }
+            }
+        }
+    }
 }

@@ -46,4 +46,6 @@ void postOrder(Tree tree);
 // 层序遍历
 void levelOrder(Tree tree);
 
+// 打印树
+void printTree(Tree tree);
 #endif //DATA_STRUCTURE_BINARY_TREE_H

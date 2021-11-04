@@ -199,12 +199,10 @@ void postOrder(Tree tree) {
 // 层序遍历
 void levelOrder(Tree tree) {
     printf("\n--- Level Order Traverse ---\n");
-    Node *temp[tree->length];
+    Node **temp = (Node **) malloc(tree->length * sizeof(Node*));
     int in = 0;
     int out = 0;
-
     temp[in++] = tree->root; //先保存二叉树根节点
-
     while (in > out) {
         if (temp[out]) {
             printf("%d ", temp[out]->data);
@@ -216,4 +214,9 @@ void levelOrder(Tree tree) {
         out++;
     }
     free(temp);
+}
+
+// 打印树
+void printTree(Tree tree) {
+    printf("\n--- print Tree ---\n");
 }

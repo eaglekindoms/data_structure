@@ -35,7 +35,7 @@ void radix_sort(int *arr, int len);
 typedef void (*sort)(int *, int);
 
 int main() {
-    int arr[] = {2, 3, 8, 5, 6, 1, 0, 1, 12, 9, 5};
+    int arr[] = {2, 3, 8, 5, 6, 1, 0, -1, -12, 9, 5};
     int len = sizeof(arr) / sizeof(int);
     int *array[10];
     sort func[] = {bubble_sort, selection_sort, insertion_sort,

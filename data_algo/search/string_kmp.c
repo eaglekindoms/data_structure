@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "string.h"
 #include "stdlib.h"
-#include <sys/time.h>
+//#include <sys/time.h>
 
 int *build_next(char *pattern);
 
@@ -22,15 +22,15 @@ int main() {
     if (!fp) exit(-101);
     fgets(str, 65500, (FILE *) fp);
     char *pattern = "Ricans were ";
-    struct timeval t1;
-    gettimeofday(&t1, NULL);
-    printf("\ns1:%ld,%ld\n", t1.tv_sec, t1.tv_usec);
+//    struct timeval t1;
+//    gettimeofday(&t1, NULL);
+//    printf("\ns1:%ld,%ld\n", t1.tv_sec, t1.tv_usec);
     kmp(str, pattern);
-    gettimeofday(&t1, NULL);
-    printf("\ns2:%ld,%ld\n", t1.tv_sec, t1.tv_usec);
+//    gettimeofday(&t1, NULL);
+//    printf("\ns2:%ld,%ld\n", t1.tv_sec, t1.tv_usec);
     mate(str, pattern);
-    gettimeofday(&t1, NULL);
-    printf("\ns3:%ld,%ld\n", t1.tv_sec, t1.tv_usec);
+//    gettimeofday(&t1, NULL);
+//    printf("\ns3:%ld,%ld\n", t1.tv_sec, t1.tv_usec);
     return 0;
 }
 

@@ -88,7 +88,7 @@ AVLNode *balance_node(AVLNode *node) {
     //判断节点是否平衡
     int balance = get_balance(node);
 
-    //left-left
+    //Left-Left
     if (balance > 1 && get_balance(node->left) >= 0)
         return right_rotate(node);
 
@@ -96,13 +96,13 @@ AVLNode *balance_node(AVLNode *node) {
     if (balance < -1 && get_balance(node->right) <= 0)
         return left_rotate(node);
 
-    // Left Right
+    // Left-Right
     if (balance > 1 && get_balance(node->left) < 0) {
         node->left = left_rotate(node->left);
         return right_rotate(node);
     }
 
-    // Right Left
+    // Right-Left
     if (balance < -1 && get_balance(node->right) > 0) {
         node->right = right_rotate(node->right);
         return left_rotate(node);
@@ -117,20 +117,20 @@ AVLNode *balance_node(AVLNode *node) {
  * 2. 根节点非空，按左小右大规则插入，插入后高度加一
  * 3. 平衡节点
  */
-AVLNode *insert_node(AVLNode *node, T data) {
+AVLNode *insert_node(AVLNode *root, T data) {
     // 先按照普通的BST方法插入节点
-    if (node == NULL)
+    if (root == NULL)
         return init_node(data);
-    if (data < node->data)
-        node->left = insert_node(node->left, data);
-    else if (data > node->data)
-        node->right = insert_node(node->right, data);
+    if (data < root->data)
+        root->left = insert_node(root->left, data);
+    else if (data > root->data)
+        root->right = insert_node(root->right, data);
     else
-        return node;
+        return root;
 
     //更新节点的高度
-    node->height = max(get_height(node->left), get_height(node->right)) + 1;
-    return balance_node(node);
+    root->height = max(get_height(root->left), get_height(root->right)) + 1;
+    return balance_node(root);
 }
 
 /*

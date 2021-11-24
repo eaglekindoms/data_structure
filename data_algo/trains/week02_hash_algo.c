@@ -25,6 +25,12 @@ HTable init_table() {
     return table;
 }
 
+/*
+ * hash冲突解决办法
+ * 拉链法：构造链表
+ * 直接定址法：冲突后地址递增
+ * 再hash法：使用多个hash算法，
+ */
 int hash(K key);
 
 void put_node(HTable *table, HNode node);
@@ -45,12 +51,6 @@ int main() {
     }
 }
 
-/*
- * hash冲突解决办法
- * 拉链法：构造链表
- * 直接定址法：冲突后地址递增
- * 再hash法：使用多个hash算法，
- */
 int hash(K key) {
     return ((int) key) % 13;
 }

@@ -120,7 +120,7 @@ int getNodeHeight(Node *node) {
 
 // 获取树高
 int getHeight(Tree tree) {
-    getNodeHeight(tree->root);
+   return getNodeHeight(tree->root);
 }
 
 
@@ -231,4 +231,8 @@ void postOrder(Tree tree) {
 // 层序遍历
 void levelOrder(Tree tree) {
     return;
+}
+
+void printTree(Tree tree) {
+    printf("\n--- print Tree ---\n");
 }

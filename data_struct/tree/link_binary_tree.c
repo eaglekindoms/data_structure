@@ -176,10 +176,28 @@ void inOrderNode(Node *node) {
     }
 }
 
+void inOrderNoRec(Node *node) {
+    Node *stack[40]={NULL};
+    int stack_ptr=0;
+    Node *ptr = node;
+    while (ptr != NULL || stack_ptr!=0) {
+        if (ptr != NULL) {
+            stack[stack_ptr++]=ptr;
+            ptr = ptr->left;
+        } else {
+            ptr = stack[--stack_ptr];
+            printf("%d ", ptr->data);
+            ptr = ptr->right;
+        }
+    }
+}
+
 // 中序遍历
 void inOrder(Tree tree) {
     printf("\n--- In Order Traverse ---\n");
     inOrderNode(tree->root);
+    printf("\n--- In Order Traverse No rec---\n");
+    inOrderNoRec(tree->root);
 }
 
 void postOrderNode(Node *node) {
@@ -199,7 +217,7 @@ void postOrder(Tree tree) {
 // 层序遍历
 void levelOrder(Tree tree) {
     printf("\n--- Level Order Traverse ---\n");
-    Node **temp = (Node **) malloc(tree->length * sizeof(Node*));
+    Node **temp = (Node **) malloc(tree->length * sizeof(Node *));
     int in = 0;
     int out = 0;
     temp[in++] = tree->root; //先保存二叉树根节点

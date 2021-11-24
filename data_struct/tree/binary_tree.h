@@ -13,6 +13,10 @@
 typedef int T;
 typedef struct Tree_T *Tree;
 
+/*
+ * 前+中序，后+中序，层+中序 可以确定一颗二叉树
+ */
+
 // 初始化二叉树
 Tree initTree();
 

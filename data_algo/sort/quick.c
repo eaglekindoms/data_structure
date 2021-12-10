@@ -11,7 +11,7 @@
  */
 // 递归排序
 void quick_sort_recursive(int *arr, int left, int right);
-
+void quickSort(int arr[], int left, int right);
 // 对数组分组，并返回基准值索引位
 int partition(int *arr, int left, int right);
 
@@ -50,4 +50,23 @@ int partition(int *arr, int left, int right) {
     // 将left指向位置替为基准值，返回基准值索引
     arr[left] = pivot;
     return left;
+}
+
+void quickSort(int nums[], int left, int right) {
+    if (left >= right) {
+        return;
+    }
+    int i = left - 1, j = right + 1;
+    int x = nums[left];
+    while (i < j) {
+        while (nums[++i] < x);
+        while (nums[--j] > x);
+        if (i < j) {
+            int t = nums[i];
+            nums[i] = nums[j];
+            nums[j] = t;
+        }
+    }
+    quickSort(nums, left, j);
+    quickSort(nums, j + 1, right);
 }

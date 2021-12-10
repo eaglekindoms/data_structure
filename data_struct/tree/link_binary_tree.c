@@ -154,18 +154,22 @@ int getHeight(Tree tree) {
     getNodeHeight(tree->root);
 }
 
-void preOrderNode(Node *node) {
+void preOrderNode(Node *node,int depth) {
     if (node != NULL) {
-        printf("%d ", node->data);
-        preOrderNode(node->left);
-        preOrderNode(node->right);
+        printf("\n");
+        for (int i = 0; i <depth ; ++i) {
+            printf("-");
+        }
+        printf("%d", node->data);
+        preOrderNode(node->left,depth+1);
+        preOrderNode(node->right,depth+1);
     }
 }
 
 // 先序遍历
 void preOrder(Tree tree) {
     printf("\n--- Pre Order Traverse ---\n");
-    preOrderNode(tree->root);
+    preOrderNode(tree->root,0);
 }
 
 void inOrderNode(Node *node) {

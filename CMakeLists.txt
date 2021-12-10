@@ -3,6 +3,8 @@ project(data_structure C CXX)
 
 include_directories(data_struct/common)
 set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 11)
+
 #add_compile_options(-fexec-charset=utf-8)
 
 add_subdirectory(data_algo)

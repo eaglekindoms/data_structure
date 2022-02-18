@@ -1,0 +1,19 @@
+#LIST(APPEND CMAKE_PROGRAM_PATH "D:\\SDK_PATH\\VTK9.1\\bin")
+#set(ENV{PATH}  "D:\\SDK_PATH\\VTK9.1\\bin")
+#link_directories({VTK_DLL})
+#
+#find_package(VTK COMPONENTS
+#        vtkCommonColor
+#        vtkCommonCore
+#        vtkCommonDataModel
+#        vtkFiltersSources
+#        vtkFiltersTexture
+#        vtkImagingHybrid
+#        vtkInteractionStyle
+#        vtkRenderingContextOpenGL2
+#        vtkRenderingCore
+#        vtkRenderingFreeType
+#        vtkRenderingGL2PSOpenGL2
+#        vtkRenderingOpenGL2
+#        QUIET
+#        )

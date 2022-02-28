@@ -11,3 +11,4 @@ add_executable(day003 day003.c)
 
 add_executable(week02_search_algo week02_search_algo.c)
 add_executable(week02_hash_algo week02_hash_algo.c)
+add_executable(leetcode_917 leetcode_917.c)

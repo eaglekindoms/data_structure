@@ -9,5 +9,5 @@ set(CMAKE_CXX_STANDARD 11)
 
 add_subdirectory(data_algo)
 add_subdirectory(data_struct)
-
+add_subdirectory(interview)
 add_executable(main01 main.c)

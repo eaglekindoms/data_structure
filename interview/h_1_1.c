@@ -53,14 +53,14 @@ int main() {
             int ab_x = tri[2] - tri[0];
             int ab_y = tri[3] - tri[1];
             if (ab_x != 0 && ab_y != 0) {
-                if ((ac_x / ab_x) == (ac_y / ab_y)) {
+                if ((ac_x + 0.0 / ab_x) == (ac_y + 0.0 / ab_y)) {
                     result[i] = 3;
                     continue;
                 }
-            } else if (ab_x==0 && tri[4]==tri[0]){
+            } else if (ab_x == 0 && tri[4] == tri[0]) {
                 result[i] = 3;
                 continue;
-            } else if (ab_y==0&&tri[5]==tri[0]){
+            } else if (ab_y == 0 && tri[5] == tri[0]) {
                 result[i] = 3;
                 continue;
             }

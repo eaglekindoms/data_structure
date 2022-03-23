@@ -40,17 +40,27 @@ int main() {
         } else if ((ab + bc) > ac) {
             result[i] = 0;
         } else if ((ab + bc) < ac) {
-            // 点重合或与y轴平行
+            // 点重合
             if ((tri[0] == tri[2] && tri[1] == tri[3])
                 || (tri[0] == tri[4] && tri[1] == tri[5])
-                || (tri[2] == tri[4] && tri[3] == tri[5])
-                || (tri[0]==tri[2]&&tri[2]==tri[4])) {
+                || (tri[2] == tri[4] && tri[3] == tri[5])) {
                 result[i] = 3;
                 continue;
             }
             // 共线
-            if(((abs(tri[2]-tri[0])/ abs(tri[4]-tri[0]))==
-            (abs(tri[3]-tri[1])/ abs(tri[5]-tri[0])))){
+            int ac_x = tri[4] - tri[0];
+            int ac_y = tri[5] - tri[1];
+            int ab_x = tri[2] - tri[0];
+            int ab_y = tri[3] - tri[1];
+            if (ab_x != 0 && ab_y != 0) {
+                if ((ac_x / ab_x) == (ac_y / ab_y)) {
+                    result[i] = 3;
+                    continue;
+                }
+            } else if (ab_x==0 && tri[4]==tri[0]){
+                result[i] = 3;
+                continue;
+            } else if (ab_y==0&&tri[5]==tri[0]){
                 result[i] = 3;
                 continue;
             }

@@ -1,6 +1,6 @@
 add_subdirectory(other)
 add_subdirectory(trains)
-add_subdirectory(vtk_learn)
+#add_subdirectory(vtk_learn)
 #----- 排序 -----
 add_subdirectory(sort/old_sort)
 #----- 排序 -----

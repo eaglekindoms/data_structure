@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.12)
 project(data_structure C CXX)
 
 include_directories(data_struct/common)

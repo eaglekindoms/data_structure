@@ -1,0 +1,7 @@
+FILE(GLOB_RECURSE cpp_dir *.cpp)
+FOREACH (dir ${cpp_dir})
+    STRING(REGEX MATCH "data_struct_cpp/.*" relative_dir "${dir}")
+    STRING(REGEX REPLACE "data_struct_cpp/" "" target_file "${relative_dir}")
+    STRING(REGEX REPLACE ".cpp" "" target_name "${target_file}")
+    ADD_EXECUTABLE(cpp_${target_name} ${dir})
+ENDFOREACH ()

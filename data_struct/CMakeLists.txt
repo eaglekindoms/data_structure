@@ -1,5 +1,5 @@
 #add_compile_options(-fexec-charset=GBK)
-
+#set(CMAKE_ARGS "-Wno-dev")
 #-------栈--------
 #顺序栈测试
 add_executable(test_stack_sq test_code/test_stack.c)
